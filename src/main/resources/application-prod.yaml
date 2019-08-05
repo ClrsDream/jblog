@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    # 默认innodb引擎
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    type: com.mysql.cj.jdbc.MysqlDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/jblog
+    username: root
+    password:
+
+# 博客项目配置
+blog:
+  index:
+    page-size: 20
