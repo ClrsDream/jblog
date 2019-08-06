@@ -17,6 +17,9 @@
     <div th:if="${error}">
         <div class="alert alert-danger">[[${error}]]</div>
     </div>
+    <div th:if="${success}">
+        <div class="alert alert-danger">[[${success}]]</div>
+    </div>
 
     <div th:replace="${content}"></div>
 
