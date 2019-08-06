@@ -1,14 +1,11 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
 <head>
-    <title>Blog</title>
+    <title>创建帖子</title>
 </head>
 <body>
 <div id="content">
-    <a th:href="@{/post/create}">添加帖子</a>
-    <li th:each="post : ${posts}">
-        <span th:text="${post.title}">标题</span>
-    </li>
+    我是内容
 </div>
 </body>
 </html>
