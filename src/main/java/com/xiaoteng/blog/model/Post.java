@@ -3,10 +3,11 @@ package com.xiaoteng.blog.model;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Table(name = "posts")
@@ -22,29 +23,30 @@ public class Post {
 
     // 帖子标题
     @NotEmpty
-    @Length(min = 10, max = 249)
+    @Length(min = 10, max = 200)
     @Column(name = "title", nullable = false)
     private String title;
 
     // 帖子内容
     @NotEmpty
-    @Length(min = 30)
+    @Length(min = 30, max = 100000)
     @Column(name = "content", nullable = false, columnDefinition = "mediumtext")
     private String content;
 
     // 帖子创建时间
     @CreatedDate
-    @Column(name = "created_at", nullable = false)
-    private Long createdAt;
+    @Column(name = "created_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
+    private Date createdAt;
 
     // 帖子最后编辑时间
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
-    private Long updatedAt;
+    @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updatedAt;
 
     // 帖子发布时间
-    @Column(name = "published_at", nullable = false)
-    private Long publishedAt;
+    @Column(name = "published_at", nullable = false, columnDefinition = "timestamp")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private Date publishedAt;
 
     public Long getId() {
         return id;
@@ -62,15 +64,15 @@ public class Post {
         return content;
     }
 
-    public Long getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public Long getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public Long getPublishedAt() {
+    public Date getPublishedAt() {
         return publishedAt;
     }
 
@@ -90,19 +92,19 @@ public class Post {
         this.content = content;
     }
 
-    public void setCreatedAt(Long createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Long updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public void setPublishedAt(Long publishedAt) {
+    public void setPublishedAt(Date publishedAt) {
         this.publishedAt = publishedAt;
     }
 
-    public Post(Long userId, String title, String content, Long createdAt, Long updatedAt, Long publishedAt) {
+    public Post(Long userId, String title, String content, Date createdAt, Date updatedAt, Date publishedAt) {
         this.userId = userId;
         this.title = title;
         this.content = content;
