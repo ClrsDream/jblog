@@ -7,7 +7,7 @@
 <div id="content">
     <a th:href="@{/post/create}">添加帖子</a>
     <li th:each="post : ${posts}">
-        <span th:text="${post.title}">标题</span>
+        <a th:href="@{/post/{id}(id=${post.id})}">[[${post.title}]]</a>
     </li>
 </div>
 </body>
