@@ -1,9 +1,12 @@
 package com.xiaoteng.blog.model;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "posts")
@@ -18,10 +21,14 @@ public class Post {
     private Long userId;
 
     // 帖子标题
+    @NotEmpty
+    @Length(min = 10, max = 249)
     @Column(name = "title", nullable = false)
     private String title;
 
     // 帖子内容
+    @NotEmpty
+    @Length(min = 30)
     @Column(name = "content", nullable = false, columnDefinition = "mediumtext")
     private String content;
 
