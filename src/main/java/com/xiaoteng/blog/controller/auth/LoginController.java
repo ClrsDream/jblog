@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
             return super.error("/auth/login", "邮箱不存在", redirectAttributes);
         }
         User user = optionalUser.get();
-        logger.info("user", user);
+        logger.info("current_login_user", user);
         // 判断密码
         if (!HashTool.check(password, user.getPassword())) {
             return super.error("/auth/login", "密码错误", redirectAttributes);

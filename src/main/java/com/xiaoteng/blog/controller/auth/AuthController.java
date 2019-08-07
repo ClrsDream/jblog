@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller.auth;
 
+import com.xiaoteng.blog.Enums.UserStatusEnum;
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
@@ -42,8 +43,11 @@ public class AuthController extends BaseController {
         User newUser = new User();
         newUser.setEmail(user.getEmail());
         newUser.setPassword(HashTool.encode(user.getPassword()));
-        newUser.setStatus(0);
+        // 用户状态，默认正常
+        newUser.setStatus(UserStatusEnum.NORMAL.getStatus());
         userRepository.save(newUser);
+
+        // TODO 发送欢迎邮件
 
         return success("/auth/login", "注册成功，请登录", redirectAttributes);
     }
