@@ -20,6 +20,9 @@
     <div th:if="${success}">
         <div class="alert alert-danger">[[${success}]]</div>
     </div>
+    <div th:if="${shiroLoginFailure}">
+        <div class="alert alert-warning">[[${shiroLoginFailure}]]</div>
+    </div>
 
     <div th:replace="${content}"></div>
 

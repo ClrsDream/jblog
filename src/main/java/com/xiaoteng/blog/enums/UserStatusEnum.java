@@ -1,4 +1,4 @@
-package com.xiaoteng.blog.Enums;
+package com.xiaoteng.blog.enums;
 
 public enum UserStatusEnum {
     NORMAL(0, "正常"),
