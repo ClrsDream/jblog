@@ -5,17 +5,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class HashTool {
 
-    private static final int strength = 16;
-
     // 加密
     public static String encode(String password) {
-        PasswordEncoder pe = new BCryptPasswordEncoder(strength);
+        PasswordEncoder pe = new BCryptPasswordEncoder();
         return pe.encode(password);
     }
 
     // 检查密码是否匹配
     public static Boolean check(String password, String hashed) {
-        PasswordEncoder pe = new BCryptPasswordEncoder(strength);
+        PasswordEncoder pe = new BCryptPasswordEncoder();
         return pe.matches(password, hashed);
     }
 

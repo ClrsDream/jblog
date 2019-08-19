@@ -26,3 +26,6 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [ ] 定时备份
 + [ ] SEO定时提交
 + [ ] Redis全站缓存
++ [ ] 单元测试
++ [ ] 图形验证码
++ [ ] job任务队列

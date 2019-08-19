@@ -7,11 +7,12 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +31,11 @@ public class User {
     // 状态[0正常,1禁止回复,2禁止发帖,3禁止回复+发帖,4禁止登录]
     @Column(name = "status", nullable = false, columnDefinition = "tinyint(2) default 0")
     private Integer status;
+
+    // 最后登录时间
+    @CreatedDate
+    @Column(name = "last_login_at", columnDefinition = "timestamp")
+    private Date lastLoginAt;
 
     // 创建时间
     @CreatedDate
@@ -96,9 +102,18 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
+                ", lastLoginAt=" + lastLoginAt +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    public Date getLastLoginAt() {
+        return lastLoginAt;
+    }
+
+    public void setLastLoginAt(Date lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
     }
 
     public User(@NotEmpty @Length(min = 6, max = 32) String email, @NotEmpty @Length(min = 6, max = 16) String password, Integer status) {

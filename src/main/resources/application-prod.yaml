@@ -9,9 +9,23 @@ spring:
   datasource:
     type: com.mysql.cj.jdbc.MysqlDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/jblog?characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/jblog?characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=PRC
     username: root
     password:
+
+  # session
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on_save
+      namespace: "jblog:spring:session"
+
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
 
   # 模板配置
   thymeleaf:
@@ -23,6 +37,10 @@ spring:
     mode: HTML5
     servlet:
       content-type: text/html
+
+# shiro
+shiro:
+  loginUrl: "/login"
 
 # 博客项目配置
 blog:
