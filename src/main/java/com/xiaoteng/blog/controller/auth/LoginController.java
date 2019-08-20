@@ -3,7 +3,6 @@ package com.xiaoteng.blog.controller.auth;
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
-import com.xiaoteng.blog.utils.HashTool;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Controller
 public class LoginController extends BaseController {
@@ -38,17 +36,18 @@ public class LoginController extends BaseController {
     public RedirectView loginHandle(RedirectAttributes redirectAttributes,
                                     HttpSession httpSession,
                                     @RequestParam(name = "email", defaultValue = "") String email,
-                                    @RequestParam(name = "password", defaultValue = "") String password) {
+                                    @RequestParam(name = "password", defaultValue = "") String password,
+                                    @RequestParam(name = "remember_me", defaultValue = "0") String rememberMe) {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
             return super.error("/login", "邮箱和密码不能为空", redirectAttributes);
         }
         Subject currentUser = SecurityUtils.getSubject();
         try {
             // 登录
-            currentUser.login(new UsernamePasswordToken(email, password));
+            currentUser.login(new UsernamePasswordToken(email, password, rememberMe.equals("1")));
             // 读取已登录的用户
             User user = (User) currentUser.getPrincipal();
-            if(user == null) {
+            if (user == null) {
                 throw new AuthenticationException();
             }
 

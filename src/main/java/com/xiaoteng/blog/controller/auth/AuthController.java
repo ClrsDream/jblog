@@ -1,7 +1,7 @@
 package com.xiaoteng.blog.controller.auth;
 
-import com.xiaoteng.blog.enums.UserStatusEnum;
 import com.xiaoteng.blog.controller.BaseController;
+import com.xiaoteng.blog.enums.UserStatusEnum;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
 import com.xiaoteng.blog.utils.HashTool;
@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 

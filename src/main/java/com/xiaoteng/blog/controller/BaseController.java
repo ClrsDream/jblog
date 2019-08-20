@@ -1,11 +1,7 @@
 package com.xiaoteng.blog.controller;
 
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.Collection;
-import java.util.Map;
 
 public class BaseController {
 

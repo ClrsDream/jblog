@@ -122,7 +122,7 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public User () {
+    public User() {
 
     }
 }

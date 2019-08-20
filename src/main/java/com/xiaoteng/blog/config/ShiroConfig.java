@@ -17,6 +17,7 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/", "anon");
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/login", "anon");
+        chainDefinition.addPathDefinition("/post/*", "anon");
         chainDefinition.addPathDefinition("/password/find", "anon");
         chainDefinition.addPathDefinition("/static/**", "anon");
         chainDefinition.addPathDefinition("/favicon.ico", "anon");
