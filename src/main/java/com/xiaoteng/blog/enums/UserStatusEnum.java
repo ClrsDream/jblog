@@ -11,6 +11,11 @@ public enum UserStatusEnum {
 
     private String des;
 
+    UserStatusEnum(Integer statusCode, String description) {
+        this.status = statusCode;
+        this.des = description;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -25,10 +30,5 @@ public enum UserStatusEnum {
 
     public void setDes(String des) {
         this.des = des;
-    }
-
-    UserStatusEnum(Integer statusCode, String description) {
-        this.status = statusCode;
-        this.des = description;
     }
 }

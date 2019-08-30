@@ -2,11 +2,9 @@ package com.xiaoteng.blog.controller.auth;
 
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.enums.UserStatusEnum;
-import com.xiaoteng.blog.jobs.SendWelcomeEmailJob;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
 import com.xiaoteng.blog.utils.HashTool;
-import com.xiaoteng.blog.utils.ThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +52,6 @@ public class AuthController extends BaseController {
         // 用户状态，默认正常
         newUser.setStatus(UserStatusEnum.NORMAL.getStatus());
         userRepository.save(newUser);
-
-        // 发送欢迎邮件
-        ThreadPool.push(new SendWelcomeEmailJob(newUser.getEmail()));
 
         return success("/login", "注册成功，请登录", redirectAttributes);
     }

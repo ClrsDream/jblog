@@ -10,14 +10,14 @@ public class BeanUtil implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (BeanUtil.applicationContext == null) {
             BeanUtil.applicationContext = applicationContext;
         }
-    }
-
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
     }
 
     public static Object getBean(String name) {

@@ -47,6 +47,16 @@ public class User implements Serializable {
     @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedAt;
 
+    public User(@NotEmpty @Length(min = 6, max = 32) String email, @NotEmpty @Length(min = 6, max = 16) String password, Integer status) {
+        this.email = email;
+        this.password = password;
+        this.status = status;
+    }
+
+    public User() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -114,15 +124,5 @@ public class User implements Serializable {
 
     public void setLastLoginAt(Date lastLoginAt) {
         this.lastLoginAt = lastLoginAt;
-    }
-
-    public User(@NotEmpty @Length(min = 6, max = 32) String email, @NotEmpty @Length(min = 6, max = 16) String password, Integer status) {
-        this.email = email;
-        this.password = password;
-        this.status = status;
-    }
-
-    public User() {
-
     }
 }
