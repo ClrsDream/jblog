@@ -5,29 +5,57 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title th:replace="${title}">Document</title>
+    <link crossorigin="anonymous" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <title th:replace="${title}">JBlog</title>
 </head>
-<body>
-    <nav>
-        <ul>
-            <li><a th:href="@{/}">首页</a></li>
-        </ul>
-    </nav>
+<body class="bg-gray-800 min-h-screen">
 
-    <div th:if="${error}">
-        <div class="alert alert-danger">[[${error}]]</div>
+    <header class="px-10 py-2 bg-gray-900 shadow-sm">
+        <div class="max-w-2xl mx-auto flex md:flex-row sm:flex-col">
+            <div class="md:flex-initial">
+                <span class="text-indigo-500 font-mono text-4xl">JBlog</span>
+            </div>
+            <div class="md:w-full pl-5">
+                <ul class="pt-4">
+                    <li class="float-left pr-5 ml-3 mr-3">
+                        <a class="text-indigo-500" href="">
+                            <i class="fa fa-dashboard mr-1"></i> 首页
+                        </a>
+                    </li>
+                    <li class="float-left pr-5 ml-3 mr-3">
+                        <a class="text-gray-500 float-right" href=""><i class="fa fa-bars mr-1"></i> 分类</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="md:flex-initial pt-4">
+                <a th:if="${user}" href="#" class="float-right text-gray-500 w-16"><i class="fa fa-user mr-1"></i>[[${user.getNicknam()}}]]</a>
+                <a th:unless="${user}" th:href="@{/login}" class="float-right text-gray-500 w-16"><i class="fa fa-user-o mr-1"></i>登录</a>
+            </div>
+        </div>
+    </header>
+
+    <div th:if="${error}" class="max-w-2xl mx-auto bg-red-800 border-2 border-red-900 rounded-lg px-2 my-2 text-white py-3">
+        <p><i class="fa fa-exclamation-triangle mr-1"></i>[[${error}]]</p>
     </div>
-    <div th:if="${success}">
-        <div class="alert alert-danger">[[${success}]]</div>
+    <div th:if="${success}" class="max-w-2xl mx-auto bg-green-800 border-2 border-green-900 rounded-lg px-2 my-2 text-white py-3">
+        <p><i class="fa fa-check-square mr-1"></i>[[${success}]]</p>
     </div>
-    <div th:if="${shiroLoginFailure}">
-        <div class="alert alert-warning">[[${shiroLoginFailure}]]</div>
+    <div th:if="${shiroLoginFailure}" class="max-w-2xl mx-auto bg-orange-800 border-2 border-orange-900 rounded-lg px-2 my-2 text-white py-3">
+        <p><i class="fa fa-info-circle mr-1"></i>[[${shiroLoginFailure}]]</p>
     </div>
 
     <div th:replace="${content}"></div>
 
-    <footer>
-        <p>Copyright jblog.</p>
+    <footer class="bg-gray-900">
+        <div class="max-w-2xl mx-auto py-2 flex flex-row text-sm text-gray-700">
+            <div class="flex-1">
+                <p>Copyright JBlog.</p>
+            </div>
+            <div class="flex-1 text-right">
+                <a href="https://github.com/Qsnh/jblog" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

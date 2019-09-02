@@ -25,6 +25,11 @@ public class User implements Serializable {
     private String email;
 
     @NotEmpty
+    @Length(min = 1, max = 10)
+    @Column(name = "nickname", nullable = false, columnDefinition = "varchar(10)")
+    private String nickname;
+
+    @NotEmpty
     @Column(name = "password", nullable = false, columnDefinition = "varchar(128)")
     private String password;
 
@@ -105,11 +110,20 @@ public class User implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", lastLoginAt=" + lastLoginAt +

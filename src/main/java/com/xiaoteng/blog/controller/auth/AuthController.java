@@ -43,11 +43,12 @@ public class AuthController extends BaseController {
         // 检测邮箱是否已经注册
         Optional<User> optionalUser = userRepository.findByEmail(user.getEmail());
         if (optionalUser.isPresent()) {
-            return error("/register", "该邮箱已经注册", redirectAttributes);
+            return error("/register", "该邮箱已被注册", redirectAttributes);
         }
         // 创建用户
         User newUser = new User();
         newUser.setEmail(user.getEmail());
+        newUser.setNickname(user.getNickname());
         newUser.setPassword(HashTool.encode(user.getPassword()));
         // 用户状态，默认正常
         newUser.setStatus(UserStatusEnum.NORMAL.getStatus());
