@@ -28,7 +28,7 @@ public class SendWelcomeEmailJob implements Runnable {
     public void run() {
         log.info("{}", "send welcome email running.");
         ApplicationContext applicationContext = BeanUtil.getApplicationContext();
-        AliyunMail aliyunMail = (AliyunMail) applicationContext.getBean(AliyunMail.class);
+        AliyunMail aliyunMail = applicationContext.getBean(AliyunMail.class);
         aliyunMail.send(this.email, "欢迎您注册成为本站会员", "您好。");
     }
 }

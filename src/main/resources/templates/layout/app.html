@@ -1,5 +1,6 @@
 <!doctype html>
-<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -19,18 +20,18 @@
             <div class="md:w-full pl-5">
                 <ul class="pt-4">
                     <li class="float-left pr-5 ml-3 mr-3">
-                        <a class="text-indigo-500" href="">
+                        <a class="text-indigo-500" th:href="@{/}">
                             <i class="fa fa-dashboard mr-1"></i> 首页
                         </a>
                     </li>
                     <li class="float-left pr-5 ml-3 mr-3">
-                        <a class="text-gray-500 float-right" href=""><i class="fa fa-bars mr-1"></i> 分类</a>
+                        <a class="text-gray-500 float-right" th:href="@{/tags}"><i class="fa fa-bars mr-1"></i> 分类</a>
                     </li>
                 </ul>
             </div>
             <div class="md:flex-initial pt-4">
-                <a th:if="${user}" href="#" class="float-right text-gray-500 w-16"><i class="fa fa-user mr-1"></i>[[${user.getNicknam()}}]]</a>
-                <a th:unless="${user}" th:href="@{/login}" class="float-right text-gray-500 w-16"><i class="fa fa-user-o mr-1"></i>登录</a>
+                <a th:if="${userService.getUser()}" href="#" class="float-right text-gray-500 w-16"><i class="fa fa-user mr-1"></i>[[${userService.getUser().getNickname()}]]</a>
+                <a th:unless="${userService.getUser()}" th:href="@{${router.LOGIN}}" class="float-right text-gray-500 w-16"><i class="fa fa-user-o mr-1"></i>登录</a>
             </div>
         </div>
     </header>

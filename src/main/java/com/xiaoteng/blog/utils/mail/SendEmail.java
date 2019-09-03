@@ -4,6 +4,6 @@ import com.aliyuncs.exceptions.ClientException;
 
 public interface SendEmail {
 
-    public void send(String email, String subject, String body) throws ClientException;
+    void send(String email, String subject, String body) throws ClientException;
 
 }

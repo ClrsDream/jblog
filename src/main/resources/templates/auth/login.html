@@ -11,7 +11,7 @@
         </div>
         <div class="w-1/2 px-10">
             <h2 class="text-center text-indigo-500 text-3xl py-10">登录</h2>
-            <form th:action="@{/login}" method="post">
+            <form th:action="@{${router.LOGIN}}" method="post">
                 <div class="py-2">
                     <input type="email" placeholder="邮箱" name="email" required class="inline-block w-full h-10 px-5 py-1 border-2 border-gray-400 bg-gray-500 rounded-lg focus:outline-none">
                 </div>
@@ -22,7 +22,7 @@
                     <label><input type="checkbox" name="remember_me" value="1"> 记住我</label>
                 </div>
                 <div class="py-2">
-                    <button type="submit" class="w-full h-10 bg-gray-700 py-2 rounded-lg mt-3 mb-3 hover:bg-gray-600 outline-none">登录</button>
+                    <button type="submit" class="w-full h-10 bg-gray-700 py-2 rounded-lg mt-3 mb-3 hover:bg-gray-600 focus:outline-none">登录</button>
                 </div>
                 <div class="py-2 text-center">
                     <a href="#" class="mr-3"><i class="fa fa-github" aria-hidden="true"></i></a>
@@ -30,7 +30,7 @@
                     <a href="#"><i class="fa fa-weixin" aria-hidden="true"></i></a>
                 </div>
                 <div class="py-2 text-center">
-                    <a th:href="@{/register}" class="text-gray-500">注册</a>
+                    <a th:href="@{${router.REGISTER}}" class="text-gray-500">注册</a>
                 </div>
             </form>
         </div>
