@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
+<head>
+    <title>用户中心</title>
+</head>
+<body>
+<div id="content">
+    <div class="max-w-2xl mx-auto mt-5 mb-5">
+        <div th:insert="/components/user_header :: user_header"></div>
+
+        <div class="max-w-xs mx-auto mb-24">
+            <div class="pt-10">
+                <form th:action="@{${router.HOME_PROFILE}}" method="post">
+                    <div>
+                        <input type="text" th:value="${userService.getUser().getGithub()}"
+                               name="github" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" placeholder="Github">
+                    </div>
+                    <div>
+                        <input type="text" th:value="${userService.getUser().getWeibo()}"
+                               name="weibo" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" placeholder="微博">
+                    </div>
+                    <div>
+                        <input type="text" th:value="${userService.getUser().getQq()}"
+                               name="qq" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" placeholder="QQ">
+                    </div>
+                    <div>
+                        <textarea name="intro" placeholder="个人简介" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" rows="3">[[${userService.getUser().getIntro()}]]</textarea>
+                    </div>
+                    <div class="mt-10">
+                        <button type="submit" class="block w-full pt-2 pb-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700">确认修改</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

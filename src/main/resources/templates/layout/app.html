@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div class="md:flex-initial pt-4">
-                <a th:if="${userService.getUser()}" href="#" class="float-right text-gray-500 w-16"><i class="fa fa-user mr-1"></i>[[${userService.getUser().getNickname()}]]</a>
+                <a th:if="${userService.getUser()}" th:href="@{${router.HOME}}" class="float-right text-gray-500 w-16"><i class="fa fa-user mr-1"></i>[[${userService.getUser().getNickname()}]]</a>
                 <a th:unless="${userService.getUser()}" th:href="@{${router.LOGIN}}" class="float-right text-gray-500 w-16"><i class="fa fa-user-o mr-1"></i>登录</a>
             </div>
         </div>

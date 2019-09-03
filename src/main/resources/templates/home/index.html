@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
+<head>
+    <title>用户中心</title>
+</head>
+<body>
+<div id="content">
+    <div class="max-w-2xl mx-auto mt-5 mb-5 min-h-screen">
+        <div th:insert="/components/user_header :: user_header"></div>
+
+        <div class="w-full pt-5">
+            <div class="flex flex-col border-b border-gray-700 py-3">
+                <div>
+                    <div class="float-left">
+                        <img src="https://ps.ssl.qhimg.com/t0143533ee5c3faec62.jpg" class="w-12 h-12 border-2 border-gray-500 rounded-full" alt="用户头像">
+                    </div>
+                    <div class="float-left ml-2">
+                        <span class="text-lg text-gray-400">霸王</span><br>
+                        <span class="text-gray-600 text-sm">三天前</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-lg">
+                    <a href="" class="text-gray-400">我常常因为不够变态而感到与你们格格不入</a>
+                </div>
+            </div>
+            <div class="flex flex-col border-b border-gray-700 py-3">
+                <div>
+                    <div class="float-left">
+                        <img src="https://ps.ssl.qhimg.com/t0143533ee5c3faec62.jpg" class="w-12 h-12 border-2 border-gray-500 rounded-full" alt="用户头像">
+                    </div>
+                    <div class="float-left ml-2">
+                        <span class="text-lg text-gray-400">霸王</span><br>
+                        <span class="text-gray-600 text-sm">三天前</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-lg">
+                    <a href="" class="text-gray-400">我常常因为不够变态而感到与你们格格不入</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
