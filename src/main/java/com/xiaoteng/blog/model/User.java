@@ -25,8 +25,32 @@ public class User implements Serializable {
     private String email;
 
     @NotEmpty
+    @Length(min = 1, max = 10)
+    @Column(name = "nickname", nullable = false, columnDefinition = "varchar(10)")
+    private String nickname;
+
+    @Column(name = "avatar", nullable = false, columnDefinition = "varchar(255) default ''")
+    private String avatar;
+
+    @NotEmpty
     @Column(name = "password", nullable = false, columnDefinition = "varchar(128)")
     private String password;
+
+    // 微博
+    @Column(name = "weibo", nullable = false, columnDefinition = "varchar(32) default ''")
+    private String Weibo;
+
+    // qq
+    @Column(name = "qq", nullable = false, columnDefinition = "varchar(16) default ''")
+    private String Qq;
+
+    // Github
+    @Column(name = "github", nullable = false, columnDefinition = "varchar(32) default ''")
+    private String Github;
+
+    // 个人简介
+    @Column(name = "intro", nullable = false, columnDefinition = "varchar(255) default ''")
+    private String Intro;
 
     // 状态[0正常,1禁止回复,2禁止发帖,3禁止回复+发帖,4禁止登录]
     @Column(name = "status", nullable = false, columnDefinition = "tinyint(2) default 0")
@@ -46,6 +70,74 @@ public class User implements Serializable {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedAt;
+
+    public User(@NotEmpty @Length(min = 6, max = 32) String email, @NotEmpty @Length(min = 6, max = 16) String password, Integer status) {
+        this.email = email;
+        this.password = password;
+        this.status = status;
+    }
+
+    public User() {
+    }
+
+    public String getWeibo() {
+        return Weibo;
+    }
+
+    public void setWeibo(String weibo) {
+        Weibo = weibo;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", password='" + password + '\'' +
+                ", Weibo='" + Weibo + '\'' +
+                ", Qq='" + Qq + '\'' +
+                ", Github='" + Github + '\'' +
+                ", Intro='" + Intro + '\'' +
+                ", status=" + status +
+                ", lastLoginAt=" + lastLoginAt +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getQq() {
+        return Qq;
+    }
+
+    public void setQq(String qq) {
+        Qq = qq;
+    }
+
+    public String getGithub() {
+        return Github;
+    }
+
+    public void setGithub(String github) {
+        Github = github;
+    }
+
+    public String getIntro() {
+        return Intro;
+    }
+
+    public void setIntro(String intro) {
+        Intro = intro;
+    }
 
     public Long getId() {
         return id;
@@ -95,17 +187,12 @@ public class User implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", status=" + status +
-                ", lastLoginAt=" + lastLoginAt +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Date getLastLoginAt() {
@@ -114,15 +201,5 @@ public class User implements Serializable {
 
     public void setLastLoginAt(Date lastLoginAt) {
         this.lastLoginAt = lastLoginAt;
-    }
-
-    public User(@NotEmpty @Length(min = 6, max = 32) String email, @NotEmpty @Length(min = 6, max = 16) String password, Integer status) {
-        this.email = email;
-        this.password = password;
-        this.status = status;
-    }
-
-    public User () {
-
     }
 }

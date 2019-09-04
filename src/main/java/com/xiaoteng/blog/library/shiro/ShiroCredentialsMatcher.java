@@ -13,10 +13,8 @@ public class ShiroCredentialsMatcher implements CredentialsMatcher {
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken authenticationToken, AuthenticationInfo authenticationInfo) {
-        log.info("authenticationToken{},authenticationInfo{}", authenticationToken, authenticationInfo);
-        String password = String.valueOf(authenticationToken.getCredentials());
+        String password = String.valueOf((char[]) authenticationToken.getCredentials());
         String hashedPassword = String.valueOf(authenticationInfo.getCredentials());
-        log.info("password{},hashedPassword{}", password, hashedPassword);
         return HashTool.check(password, hashedPassword);
     }
 }

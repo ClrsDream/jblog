@@ -1,23 +1,40 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
 <head>
-    <title>登录</title>
+    <title>登录 - JBlog</title>
 </head>
 <body>
 <div id="content">
-    <form method="post">
-        <div class="form-group">
-            <label>邮箱</label>
-            <input type="email" class="form-control" name="email" placeholder="请输入邮箱">
+    <div class="max-w-2xl flex mx-auto my-32 bg-gray-900 shadow-lg rounded-lg">
+        <div class="w-1/2 rounded-tl-lg rounded-bl-lg">
+            <img src="/assets/images/login-banner.jpg" class="object-cover object-center w-full h-full rounded-tl-lg rounded-bl-lg">
         </div>
-        <div class="form-group">
-            <label>密码</label>
-            <input type="password" class="form-control" name="password" placeholder="请输入密码">
+        <div class="w-1/2 px-10">
+            <h2 class="text-center text-indigo-500 text-3xl py-10">登录</h2>
+            <form th:action="@{${router.LOGIN}}" method="post">
+                <div class="py-2">
+                    <input type="email" placeholder="邮箱" name="email" required class="inline-block w-full h-10 px-5 py-1 border-2 border-gray-400 bg-gray-500 rounded-lg focus:outline-none">
+                </div>
+                <div class="py-2">
+                    <input type="password" placeholder="密码" name="password" required class="inline-block w-full h-10 px-5 py-1 border-2 border-gray-400 bg-gray-500 rounded-lg focus:outline-none">
+                </div>
+                <div class="py-2">
+                    <label><input type="checkbox" name="remember_me" value="1"> 记住我</label>
+                </div>
+                <div class="py-2">
+                    <button type="submit" class="w-full h-10 bg-gray-700 py-2 rounded-lg mt-3 mb-3 hover:bg-gray-600 focus:outline-none">登录</button>
+                </div>
+                <div class="py-2 text-center">
+                    <a href="#" class="mr-3"><i class="fa fa-github" aria-hidden="true"></i></a>
+                    <a href="#" class="mr-3"><i class="fa fa-qq" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-weixin" aria-hidden="true"></i></a>
+                </div>
+                <div class="py-2 text-center">
+                    <a th:href="@{${router.REGISTER}}" class="text-gray-500">注册</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">登录</button>
-        </div>
-    </form>
+    </div>
 </div>
 </body>
 </html>

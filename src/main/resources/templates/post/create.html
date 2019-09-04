@@ -1,27 +1,48 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content}, ~{::#js})}">
 <head>
     <title>创建帖子</title>
 </head>
 <body>
 <div id="content">
-    <form th:action="@{/post/create}" method="post">
-        <div class="form-group">
-            <label>标题</label>
-            <input type="text" class="form-control" name="title" placeholder="请输入标题">
+
+    <div class="max-w-2xl mx-auto mt-5 mb-5 min-h-screen">
+
+        <div class="w-full mt-10">
+            <a th:href="@{${router.HOME}}" class="px-3 py-2 bg-gray-700 border-2 border-gray-600 rounded-lg hover:bg-gray-700 text-gray-500">
+                <i class="fa fa-home"></i> 返回个人主页
+            </a>
         </div>
-        <div class="form-group">
-            <label>内容</label>
-            <textarea name="content" class="form-control" rows="5"></textarea>
+
+        <div class="mt-10">
+            <h2 class="text-center text-2xl font-bold text-indigo-500">
+                <i class="fa fa-edit"></i> 写文章
+            </h2>
         </div>
-        <div class="form-group">
-            <label>发布时间</label>
-            <input type="text" name="publishedAt" class="form-control" placeholder="请输入发布时间">
+
+        <div class="max-w-2xl mx-auto">
+            <div class="pt-10">
+                <div>
+                    <input type="text" placeholder="文章标题" name="title" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
+                </div>
+                <div>
+
+                </div>
+                <div>
+                    <input type="text" placeholder="文章发布时间" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
+                </div>
+                <div class="mt-10">
+                    <button type="submit" class="block float-right px-3 py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700">发布文章</button>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">创建</button>
-        </div>
-    </form>
+
+    </div>
+</div>
+
+<div id="js">
+    <script crossorigin="anonymous" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" src="https://lib.baomitu.com/jquery/3.4.1/jquery.min.js"></script>
+
 </div>
 </body>
 </html>

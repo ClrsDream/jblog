@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="user_header">
+    <div class="w-full">
+        <div id="user-banner" class="flex flex-row">
+            <div class="float-left flex-shrink-0">
+                <img th:src="${userService.getUser().getAvatar()}" class="w-16 h-16 border-2 border-gray-500 rounded-full" th:alt="${userService.getUser().getNickname()}">
+            </div>
+            <div class="float-left ml-3 flex-initial">
+                <span class="inline-block mb-2 text-lg text-gray-400">[[${userService.getUser().getNickname()}]]</span><br>
+                <span class="text-sm text-gray-700" th:unless="${userService.getUser().getIntro().isEmpty()}">[[${userService.getUser().getIntro()}]]</span>
+                <span class="text-sm text-gray-700" th:if="${userService.getUser().getIntro().isEmpty()}">这个用户很懒，什么都没有留下...</span>
+            </div>
+            <div class="float-left w-full">
+                <a th:href="@{https://weibo.com/{id}(id=${userService.getUser().getWeibo()})}"
+                   th:if="${userService.getUser().getWeibo()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-weibo"></i></a>
+                <a th:href="@{https://github.com/{id}(id=${userService.getUser().getGithub()})}"
+                   th:if="${userService.getUser().getGithub()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-github"></i></a>
+                <br>
+                <a th:href="@{${router.POST_CREATE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500"><i class="fa fa-edit"></i> 写文章</a>
+                <a th:href="@{${router.HOME_PROFILE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 mr-3"><i class="fa fa-cogs"></i> 编辑个人资料</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full mt-10">
+        <div class="flex flex-row">
+            <div class="flex-initial mr-5 text-indigo-500 border-b-2 border-indigo-600 pb-2">
+                <a href="#">我的文章</a>
+            </div>
+            <div class="flex-initial mr-5 hover:text-indigo-500 text-gray-500">
+                <a href="#">我的收藏</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

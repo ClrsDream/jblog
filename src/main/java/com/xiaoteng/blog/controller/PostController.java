@@ -46,13 +46,13 @@ public class PostController extends BaseController {
     @GetMapping("/{id}")
     public String detail(ModelMap modelMap,
                          @PathVariable("id") Long id) {
-       Optional<Post> optional = postRepository.findById(id);
-       if (!optional.isPresent()) {
+        Optional<Post> optional = postRepository.findById(id);
+        if (!optional.isPresent()) {
             throw new PostNotFoundException();
-       }
-       Post post = optional.get();
-       modelMap.addAttribute("post", post);
-       return "/post/detail";
+        }
+        Post post = optional.get();
+        modelMap.addAttribute("post", post);
+        return "/post/detail";
     }
 
 }

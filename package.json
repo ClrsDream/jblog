@@ -1,0 +1,34 @@
+{
+  "name": "jblog",
+  "version": "0.0.1",
+  "description": "jblog",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^9.6.1",
+    "jquery": "^3.4.1",
+    "postcss-cli": "^6.1.3",
+    "simditor": "^2.3.28",
+    "simple-module": "^3.0.3",
+    "tailwindcss": "^1.1.2"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind-build": "npx tailwind build ./resources/assets/css/app.css -o ./src/main/resources/static/assets/css/app.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qsnh/jblog.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "xiaoteng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Qsnh/jblog/issues"
+  },
+  "homepage": "https://github.com/Qsnh/jblog#readme"
+}

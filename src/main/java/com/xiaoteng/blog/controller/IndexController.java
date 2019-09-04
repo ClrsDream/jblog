@@ -1,6 +1,7 @@
 package com.xiaoteng.blog.controller;
 
 import com.xiaoteng.blog.model.Post;
+import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ public class IndexController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/")
+    @GetMapping(WebRouter.INDEX)
     public String index(ModelMap modelMap,
                         @RequestParam(name = "page", defaultValue = "1") Integer page) {
         page = page <= 0 ? 1 : page;

@@ -14,6 +14,7 @@ public class ShiroRealm extends AuthorizingRealm {
     public UserService userService;
 
     {
+        // 配置shiro的密码校验规则
         ShiroCredentialsMatcher shiroCredentialsMatcher = new ShiroCredentialsMatcher();
         this.setCredentialsMatcher(shiroCredentialsMatcher);
     }
