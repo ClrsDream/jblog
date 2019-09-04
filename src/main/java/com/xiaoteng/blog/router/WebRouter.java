@@ -12,4 +12,8 @@ public class WebRouter {
 
     public final static String HOME_PROFILE = "/home/profile";
 
+    public final static String POST_CREATE = "/post/create";
+
+    public final static String POST_DETAIL = "/post/{id}";
+
 }
