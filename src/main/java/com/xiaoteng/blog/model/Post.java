@@ -23,13 +23,13 @@ public class Post {
 
     // 帖子标题
     @NotEmpty
-    @Length(min = 10, max = 200)
+    @Length(min = 2, max = 200)
     @Column(name = "title", nullable = false)
     private String title;
 
     // 帖子内容
     @NotEmpty
-    @Length(min = 30, max = 100000)
+    @Length(min = 5, max = 100000)
     @Column(name = "content", nullable = false, columnDefinition = "mediumtext")
     private String content;
 
@@ -45,7 +45,7 @@ public class Post {
 
     // 帖子发布时间
     @Column(name = "published_at", nullable = false, columnDefinition = "timestamp")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishedAt;
 
     public Post(Long userId, String title, String content, Date createdAt, Date updatedAt, Date publishedAt) {

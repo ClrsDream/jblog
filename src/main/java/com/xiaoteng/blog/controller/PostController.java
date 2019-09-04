@@ -3,6 +3,7 @@ package com.xiaoteng.blog.controller;
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.repositories.PostRepository;
+import com.xiaoteng.blog.router.WebRouter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,23 +17,22 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/post")
 public class PostController extends BaseController {
 
     @Autowired
     private PostRepository postRepository;
 
-    @GetMapping("/create")
+    @GetMapping(WebRouter.POST_CREATE)
     public String create() {
         return "post/create";
     }
 
-    @PostMapping("/create")
+    @PostMapping(WebRouter.POST_CREATE)
     public RedirectView store(RedirectAttributes redirectAttributes,
                               @Valid @ModelAttribute Post post,
                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return super.error("/post/create", Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
+            return super.error(WebRouter.POST_CREATE, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
         }
         Post newPost = new Post();
         newPost.setTitle(post.getTitle());
@@ -40,10 +40,10 @@ public class PostController extends BaseController {
         newPost.setPublishedAt(post.getPublishedAt());
         postRepository.save(newPost);
 
-        return super.success("/", "添加成功", redirectAttributes);
+        return super.success(WebRouter.INDEX, "添加成功", redirectAttributes);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(WebRouter.POST_DETAIL)
     public String detail(ModelMap modelMap,
                          @PathVariable("id") Long id) {
         Optional<Post> optional = postRepository.findById(id);
