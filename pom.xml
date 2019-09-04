@@ -97,6 +97,13 @@
             <version>1.12.1</version>
         </dependency>
 
+        <!-- markdown解析工具 -->
+        <dependency>
+            <groupId>com.youbenzi</groupId>
+            <artifactId>MDTool</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>

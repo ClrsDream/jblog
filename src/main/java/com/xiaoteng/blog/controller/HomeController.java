@@ -4,6 +4,7 @@ import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
 import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.UserService;
+import com.xiaoteng.blog.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,7 @@ public class HomeController extends BaseController {
         user.setWeibo(weibo);
         user.setGithub(github);
         user.setQq(qq);
-        user.setIntro(intro);
+        user.setIntro(Helper.clean(intro));
         userRepository.save(user);
 
         return success(WebRouter.HOME_PROFILE, "资料编辑成功", redirectAttributes);

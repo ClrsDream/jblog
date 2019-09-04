@@ -9,7 +9,7 @@
             </div>
             <div class="float-left ml-3 flex-initial">
                 <span class="inline-block mb-2 text-lg text-gray-400">[[${userService.getUser().getNickname()}]]</span><br>
-                <span class="text-sm text-gray-700" th:unless="${userService.getUser().getIntro().isEmpty()}">[[${userService.getUser().getIntro()}]]</span>
+                <span class="text-sm text-gray-700" th:unless="${userService.getUser().getIntro().isEmpty()}">[(${md.toHTML(userService.getUser().getIntro())})]</span>
                 <span class="text-sm text-gray-700" th:if="${userService.getUser().getIntro().isEmpty()}">这个用户很懒，什么都没有留下...</span>
             </div>
             <div class="float-left w-full">
