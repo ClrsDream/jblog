@@ -1,11 +1,11 @@
 package com.xiaoteng.blog.controller;
 
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
+import com.xiaoteng.blog.library.jsoup.JBlogWhiteList;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.repositories.PostRepository;
 import com.xiaoteng.blog.router.WebRouter;
 import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,7 +39,7 @@ public class PostController extends BaseController {
         if (bindingResult.hasErrors()) {
             return error(WebRouter.POST_CREATE, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
         }
-        String content = Jsoup.clean(post.getContent(), Whitelist.basic());
+        String content = Jsoup.clean(post.getContent(), JBlogWhiteList.basic());
         if (content.isEmpty()) {
             // 过滤xss之后为空
             return error(WebRouter.POST_CREATE, "文章内容不能为空", redirectAttributes);
