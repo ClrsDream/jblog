@@ -4,6 +4,7 @@ import com.xiaoteng.blog.exceptions.PostNotFoundException;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.repositories.PostRepository;
 import com.xiaoteng.blog.router.WebRouter;
+import com.xiaoteng.blog.service.UserService;
 import com.xiaoteng.blog.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class PostController extends BaseController {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping(WebRouter.POST_CREATE)
     public String create() {
         return "post/create";
@@ -44,6 +48,7 @@ public class PostController extends BaseController {
             return error(WebRouter.POST_CREATE, "文章内容不能为空", redirectAttributes);
         }
         Post newPost = new Post();
+        newPost.setUser(userService.getUser());
         newPost.setTitle(post.getTitle());
         newPost.setContent(content);
         newPost.setPublishedAt(post.getPublishedAt());
