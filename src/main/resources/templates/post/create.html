@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content}, ~{::#js})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
 <head>
     <title>创建帖子</title>
 </head>
@@ -20,29 +20,65 @@
             </h2>
         </div>
 
-        <div class="max-w-2xl mx-auto">
+        <div>
             <div class="pt-10">
-                <div>
-                    <input type="text" placeholder="文章标题" name="title" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
-                </div>
-                <div>
-
-                </div>
-                <div>
-                    <input type="text" placeholder="文章发布时间" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
-                </div>
-                <div class="mt-10">
-                    <button type="submit" class="block float-right px-3 py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700">发布文章</button>
-                </div>
+                <form th:action="@{${router.POST_CREATE}}" method="post" onsubmit="return submitHandler()">
+                    <div>
+                        <input type="text" placeholder="文章标题" name="title" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
+                    </div>
+                    <div>
+                        <div id="editor" class="bg-gray-700 rounded-lg"></div>
+                        <div class="hidden">
+                            <textarea name="content"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="文章发布时间" id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
+                    </div>
+                    <div class="mt-10">
+                        <button type="submit" class="block float-right px-3 py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 focus:outline-none">发布文章</button>
+                    </div>
+                </form>
             </div>
         </div>
 
     </div>
+
+    <script>
+        function submitHandler() {
+            $('textarea[name="content"]').val(window.editor.txt.html());
+            return true;
+        }
+        $(function () {
+            laydate.render({elem: '#publishedAt',type:'datetime'});
+
+            window.editor = new window.wangEditor('#editor');
+            window.editor.customConfig.menus = [
+                'head',  // 标题
+                'bold',  // 粗体
+                'fontSize',  // 字号
+                'fontName',  // 字体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'strikeThrough',  // 删除线
+                'foreColor',  // 文字颜色
+                'backColor',  // 背景颜色
+                'link',  // 插入链接
+                'list',  // 列表
+                'justify',  // 对齐方式
+                'quote',  // 引用
+                'image',  // 插入图片
+                'table',  // 表格
+                'video',  // 插入视频
+                'code',  // 插入代码
+            ];
+            window.editor.customConfig.uploadImgServer = "[[${router.UPLOAD_IMAGE}]]";
+            window.editor.customConfig.uploadImgMaxSize = 1 * 1024 * 1024;
+            window.editor.customConfig.uploadFileName = 'file';
+            window.editor.create();
+        });
+    </script>
 </div>
 
-<div id="js">
-    <script crossorigin="anonymous" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" src="https://lib.baomitu.com/jquery/3.4.1/jquery.min.js"></script>
-
-</div>
 </body>
 </html>

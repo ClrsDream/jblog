@@ -12,15 +12,14 @@
     "tailwindcss": "^1.1.2"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^1.2.0"
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind-build": "npx tailwind build ./resources/assets/css/app.css -o ./src/main/resources/static/assets/css/app.css"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Qsnh/jblog.git"
+    "tailwind-build": "npx tailwind build ./resources/assets/css/app.css -o ./src/main/resources/static/assets/css/app.css",
+    "build": "./node_modules/.bin/webpack --config webpack.config.js",
+    "dep": "cp ./resources/dist/bundle.js ./src/main/resources/static/assets/js/"
   },
   "keywords": [
     "blog"

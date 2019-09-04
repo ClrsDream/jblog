@@ -1,13 +1,19 @@
 package com.xiaoteng.blog.controller;
 
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
+import com.xiaoteng.blog.library.jsoup.JBlogWhiteList;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.repositories.PostRepository;
+import com.xiaoteng.blog.router.WebRouter;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -16,34 +22,38 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/post")
 public class PostController extends BaseController {
 
     @Autowired
     private PostRepository postRepository;
 
-    @GetMapping("/create")
+    @GetMapping(WebRouter.POST_CREATE)
     public String create() {
         return "post/create";
     }
 
-    @PostMapping("/create")
+    @PostMapping(WebRouter.POST_CREATE)
     public RedirectView store(RedirectAttributes redirectAttributes,
                               @Valid @ModelAttribute Post post,
                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return super.error("/post/create", Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
+            return error(WebRouter.POST_CREATE, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
+        }
+        String content = Jsoup.clean(post.getContent(), JBlogWhiteList.basic());
+        if (content.isEmpty()) {
+            // 过滤xss之后为空
+            return error(WebRouter.POST_CREATE, "文章内容不能为空", redirectAttributes);
         }
         Post newPost = new Post();
         newPost.setTitle(post.getTitle());
-        newPost.setContent(post.getContent());
+        newPost.setContent(content);
         newPost.setPublishedAt(post.getPublishedAt());
         postRepository.save(newPost);
 
-        return super.success("/", "添加成功", redirectAttributes);
+        return super.success(WebRouter.INDEX, "添加成功", redirectAttributes);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(WebRouter.POST_DETAIL)
     public String detail(ModelMap modelMap,
                          @PathVariable("id") Long id) {
         Optional<Post> optional = postRepository.findById(id);
