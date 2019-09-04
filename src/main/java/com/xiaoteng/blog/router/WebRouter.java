@@ -16,4 +16,6 @@ public class WebRouter {
 
     public final static String POST_DETAIL = "/post/{id}";
 
+    public final static String UPLOAD_IMAGE = "/upload/image";
+
 }

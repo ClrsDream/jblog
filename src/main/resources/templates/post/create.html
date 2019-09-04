@@ -72,6 +72,9 @@
                 'video',  // 插入视频
                 'code',  // 插入代码
             ];
+            window.editor.customConfig.uploadImgServer = "[[${router.UPLOAD_IMAGE}]]";
+            window.editor.customConfig.uploadImgMaxSize = 1 * 1024 * 1024;
+            window.editor.customConfig.uploadFileName = 'file';
             window.editor.create();
         });
     </script>
