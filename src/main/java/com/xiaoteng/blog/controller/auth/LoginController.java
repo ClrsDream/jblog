@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller.auth;
 
+import com.xiaoteng.blog.annotations.LoginRedirect;
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.router.WebRouter;
@@ -22,11 +23,13 @@ public class LoginController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @GetMapping(WebRouter.LOGIN)
+    @LoginRedirect
     public String login() {
         return "auth/login";
     }
 
     @PostMapping(WebRouter.LOGIN)
+    @LoginRedirect
     public RedirectView loginHandle(RedirectAttributes redirectAttributes,
                                     @RequestParam(name = "email", defaultValue = "") String email,
                                     @RequestParam(name = "password", defaultValue = "") String password,

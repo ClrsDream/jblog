@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller.auth;
 
+import com.xiaoteng.blog.annotations.LoginRedirect;
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.router.WebRouter;
@@ -27,11 +28,13 @@ public class AuthController extends BaseController {
     private UserService userService;
 
     @GetMapping(WebRouter.REGISTER)
+    @LoginRedirect
     public String showRegisterPage() {
         return "auth/register";
     }
 
     @PostMapping(WebRouter.REGISTER)
+    @LoginRedirect
     public RedirectView registerHandle(RedirectAttributes redirectAttributes,
                                        @Valid @ModelAttribute User user,
                                        BindingResult bindingResult) {
