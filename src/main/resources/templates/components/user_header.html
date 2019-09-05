@@ -14,11 +14,14 @@
             </div>
             <div class="float-left w-full">
                 <a th:href="@{https://weibo.com/{id}(id=${userService.getUser().getWeibo()})}"
+                   title="微博"
                    th:if="${userService.getUser().getWeibo()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-weibo"></i></a>
                 <a th:href="@{https://github.com/{id}(id=${userService.getUser().getGithub()})}"
+                   title="Github"
                    th:if="${userService.getUser().getGithub()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-github"></i></a>
                 <br>
-                <a th:href="@{${router.POST_CREATE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 ml-2"><i class="fa fa-edit"></i> 写文章</a>
+                <a th:href="@{${router.POST_CREATE}}"
+                   class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 hover:border-indigo-400 hover:bg-indigo-500 hover:text-gray-200"><i class="fa fa-edit"></i> 写文章</a>
             </div>
         </div>
     </div>
@@ -38,7 +41,7 @@
                 <a th:href="@{${router.HOME_CHANGE_PASSWORD}}"><i class="fa fa-lock"></i> 修改密码</a>
             </div>
             <div class="flex-initial mr-5 hover:text-indigo-500 text-gray-500">
-                <a th:href="@{${router.LOGOUT}}"><i class="fa fa-power-off"></i> 安全退出</a>
+                <a onclick="return confirm('确定退出？')" th:href="@{${router.LOGOUT}}"><i class="fa fa-power-off"></i> 安全退出</a>
             </div>
         </div>
     </div>

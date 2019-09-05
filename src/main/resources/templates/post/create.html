@@ -8,32 +8,33 @@
 
     <div class="max-w-2xl mx-auto mt-5 mb-5 min-h-screen">
 
-        <div class="w-full mt-10">
-            <a th:href="@{${router.HOME}}" class="px-3 py-2 bg-gray-700 border-2 border-gray-600 rounded-lg hover:bg-gray-700 text-gray-500">
+        <div class="w-full mt-6">
+            <a th:href="@{${router.HOME}}"
+               class="inline-block px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 hover:border-indigo-400 hover:bg-indigo-500 hover:text-gray-200">
                 <i class="fa fa-home"></i> 返回个人主页
             </a>
         </div>
 
-        <div class="mt-10">
-            <h2 class="text-center text-2xl font-bold text-indigo-500">
+        <div class="mt-6">
+            <h2 class="text-center text-2xl text-gray-500">
                 <i class="fa fa-edit"></i> 写文章
             </h2>
         </div>
 
         <div>
-            <div class="pt-10">
+            <div class="pt-6">
                 <form th:action="@{${router.POST_CREATE}}" method="post" onsubmit="return submitHandler()">
                     <div>
-                        <input type="text" placeholder="文章标题" name="title" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
+                        <input type="text" placeholder="文章标题" name="title" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                     </div>
                     <div>
-                        <div id="editor" class="bg-gray-700 rounded-lg"></div>
+                        <div id="editor" class="bg-white"></div>
                         <div class="hidden">
                             <textarea name="content"></textarea>
                         </div>
                     </div>
                     <div>
-                        <input type="text" placeholder="文章发布时间" id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-700 border-2 border-gray-700 rounded-lg focus:outline-none">
+                        <input type="text" placeholder="文章发布时间" id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                     </div>
                     <div class="mt-10">
                         <button type="submit" class="block float-right px-3 py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 focus:outline-none">发布文章</button>
