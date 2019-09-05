@@ -3,6 +3,7 @@ package com.xiaoteng.blog.router;
 public class WebRouter {
 
     public final static String INDEX = "/";
+    public final static String INDEX_PARAM = "/{type}";
 
     public final static String LOGIN = "/login";
 

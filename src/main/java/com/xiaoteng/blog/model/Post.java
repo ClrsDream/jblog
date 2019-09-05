@@ -34,6 +34,9 @@ public class Post {
     @Column(name = "content", nullable = false, columnDefinition = "mediumtext")
     private String content;
 
+    @Column(name = "read_num", nullable = false, columnDefinition = "bigint(15) default 0")
+    private Long readNum;
+
     // 帖子创建时间
     @CreatedDate
     @Column(name = "created_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
