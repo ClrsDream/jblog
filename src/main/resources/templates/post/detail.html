@@ -1,13 +1,40 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
 <head>
-    <title>[[${post.title}]]</title>
+    <title>[[${post.getTitle()}]]</title>
 </head>
 <body>
 <div id="content">
-    <h1>[[${post.title}]]</h1>
-    <p>创建时间：[[${post.publishedAt}]]</p>
-    <p>[[${post.content}]]</p>
+    <div class="max-w-2xl mx-auto">
+        <h1 class="block w-full py-6 text-3xl text-gray-400">
+            [[${post.getTitle()}]]
+        </h1>
+        <div class="flex">
+            <a href="#">
+                <img th:src="${post.getUser().getAvatar()}" class="w-12 h-12 mt-1 mb-1 border-2 border-gray-700 rounded-full">
+            </a>
+            <div class="ml-2 text-gray-500">
+                <span class="text-gray-400 text-lg">[[${post.getUser().getNickname()}]]</span><br>
+                <span class="text-sm">[(${md.toHTML(post.getUser().getIntro())})]</span>
+            </div>
+        </div>
+        <div class="py-5">
+            <a class="inline-block px-4 py-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-600 hover:bg-gray-500">PHP</a>
+            <a class="inline-block px-4 py-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-600 hover:bg-gray-500">Java</a>
+        </div>
+        <div id="content" class="leading-loose text-gray-500">[(${post.getContent()})]</div>
+
+        <div class="max-w-2xl mx-auto mt-10 border-2 border-gray-900 mb-10 rounded-lg">
+            <div class="w-full text-gray-500 px-3 py-2 bg-gray-900 text-indigo-500">下面的的文章您可能也感兴趣</div>
+            <div class="pl-8 py-2">
+                <ul class="list-disc">
+                    <li class="leading-loose">
+                        <a class="hover:text-indigo-500 text-gray-500" href="#">我常常因为不够变态而与你们格格不入</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

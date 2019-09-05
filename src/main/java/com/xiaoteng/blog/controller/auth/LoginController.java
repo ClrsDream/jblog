@@ -59,4 +59,11 @@ public class LoginController extends BaseController {
         }
     }
 
+    @GetMapping(WebRouter.LOGOUT)
+    public RedirectView logout(RedirectAttributes redirectAttributes) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return success(WebRouter.INDEX, "已安全退出", redirectAttributes);
+    }
+
 }

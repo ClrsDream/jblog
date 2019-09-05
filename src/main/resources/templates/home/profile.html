@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
 <head>
-    <title>用户中心</title>
+    <title>修改资料</title>
 </head>
 <body>
 <div id="content">
@@ -13,22 +13,22 @@
                 <form th:action="@{${router.HOME_PROFILE}}" method="post">
                     <div>
                         <input type="text" th:value="${userService.getUser().getGithub()}"
-                               name="github" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" placeholder="Github">
+                               name="github" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" placeholder="Github">
                     </div>
                     <div>
                         <input type="text" th:value="${userService.getUser().getWeibo()}"
-                               name="weibo" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" placeholder="微博">
+                               name="weibo" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" placeholder="微博">
                     </div>
                     <div>
                         <input type="text" th:value="${userService.getUser().getQq()}"
-                               name="qq" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" placeholder="QQ">
+                               name="qq" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" placeholder="QQ">
                     </div>
                     <div>
-                        <textarea name="intro" placeholder="个人简介" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none" rows="3">[[${userService.getUser().getIntro()}]]</textarea>
-                        <p class="text-sm text-gray-700"><i class="fa fa-info mr-1"></i>支持markdown语法哦</p>
+                        <textarea name="intro" placeholder="个人简介" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" rows="4">[[${userService.getUser().getIntro()}]]</textarea>
+                        <p class="text-sm text-gray-600"><i class="fa fa-info mr-1"></i>支持markdown语法哦</p>
                     </div>
                     <div class="mt-10">
-                        <button type="submit" class="block w-full pt-2 pb-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700">确认修改</button>
+                        <button type="submit" class="block w-full pt-2 pb-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600">确认修改</button>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller;
 
+import com.xiaoteng.blog.annotations.PostReadNumInc;
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.router.WebRouter;
@@ -52,6 +53,7 @@ public class PostController extends BaseController {
     }
 
     @GetMapping(WebRouter.POST_DETAIL)
+    @PostReadNumInc
     public String detail(ModelMap modelMap,
                          @PathVariable("id") Long id) {
         Post post = postService.findById(id);

@@ -53,12 +53,18 @@ public class PostService {
         post1.setTitle(post.getTitle());
         post1.setContent(content);
         post1.setPublishedAt(post.getPublishedAt());
+        post1.setReadNum(0L);
         postRepository.save(post1);
     }
 
     public Post findById(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         return optionalPost.orElse(null);
+    }
+
+    public void readNumInc(Post post) {
+        post.setReadNum(post.getReadNum() + 1);
+        postRepository.save(post);
     }
 
 }
