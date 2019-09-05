@@ -65,6 +65,14 @@ public class Post {
 
     }
 
+    public Long getReadNum() {
+        return readNum;
+    }
+
+    public void setReadNum(Long readNum) {
+        this.readNum = readNum;
+    }
+
     public User getUser() {
         return user;
     }

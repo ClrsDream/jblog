@@ -7,6 +7,8 @@ public class WebRouter {
 
     public final static String LOGIN = "/login";
 
+    public final static String LOGOUT = "/logout";
+
     public final static String REGISTER = "/register";
 
     public final static String HOME = "/home";
