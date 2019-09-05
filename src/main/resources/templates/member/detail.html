@@ -5,6 +5,7 @@
 </head>
 <body>
 <div id="content">
+
     <div class="max-w-2xl mx-auto mt-5 mb-5 min-h-screen">
         <div class="w-full float-left">
             <a th:href="@{${router.MEMBER_DETAIL}(id=${user.getId()})}" class="inline-block float-left">
@@ -22,7 +23,7 @@
                     [[${post.getTitle()}]]
                 </a>
                 <div class="flex-1 text-sm text-gray-600 leading-relaxed mt-2 mb-2">
-                    <p>[[${post.getContent()}]]</p>
+                    <p>[[${helper.sub(post.getContent())}]]</p>
                 </div>
                 <div class="flex-1 text-gray-600 text-sm">
                     <span class="mr-2"><i class="fa fa-eye"></i> [[${post.getReadNum()}]]</span>
