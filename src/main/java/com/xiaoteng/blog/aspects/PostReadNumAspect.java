@@ -16,10 +16,9 @@ import org.springframework.ui.ModelMap;
 @Component
 public class PostReadNumAspect {
 
+    private final static Logger log = LoggerFactory.getLogger(PostReadNumAspect.class);
     @Autowired
     private PostService postService;
-
-    private final static Logger log = LoggerFactory.getLogger(PostReadNumAspect.class);
 
     @Pointcut("@annotation(com.xiaoteng.blog.annotations.PostReadNumInc)")
     public void p() {

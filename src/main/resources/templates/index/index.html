@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="mt-5 text-right">
-                <a class="inline-block px-3 py-2 text-gray-500 bg-gray-700 rounded-lg" th:if="${page} > 0" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page}-1)}">上一页</a>
-                <a class="inline-block px-3 py-2 text-gray-500 bg-gray-700 rounded-lg">共[[${posts.getTotalPages()}]]页</a>
-                <a class="inline-block px-3 py-2 text-gray-500 bg-gray-700 rounded-lg" th:if="${posts.getTotalPages()} - 1 > ${page}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page}+1)}">下一页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${page} > 0" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page})}">上一页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg">共[[${posts.getTotalPages()}]]页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${posts.getTotalPages()} - 1 > ${page}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page}+2)}">下一页</a>
             </div>
         </div>
     </div>

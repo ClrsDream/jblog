@@ -1,12 +1,19 @@
 package com.xiaoteng.blog.controller;
 
+import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
 import com.xiaoteng.blog.router.WebRouter;
+import com.xiaoteng.blog.service.PostService;
 import com.xiaoteng.blog.service.UserService;
+import com.xiaoteng.blog.service.query.PostQuery;
 import com.xiaoteng.blog.utils.HashTool;
 import com.xiaoteng.blog.utils.Helper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +25,32 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class HomeController extends BaseController {
 
+    private final static Logger log = LoggerFactory.getLogger(HomeController.class);
+
     @Autowired
     private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PostService postService;
+
+    @Value("${blog.member.page-size}")
+    private Integer pageSize;
+
     @GetMapping(WebRouter.HOME)
-    public String index(ModelMap modelMap) {
+    public String index(ModelMap modelMap,
+                        @RequestParam(name = "page", defaultValue = "1") Integer page) {
+        PostQuery postQuery = new PostQuery();
+        postQuery.setUser(userService.getUser());
+        page = page <= 0 ? 1 : page;
+        page -= 1;
+        Page<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
+        log.info("查询结果：{}，查询条件：{}", posts, postQuery);
         modelMap.addAttribute("active", "index");
+        modelMap.addAttribute("posts", posts);
+        modelMap.addAttribute("page", page);
         return "home/index";
     }
 
