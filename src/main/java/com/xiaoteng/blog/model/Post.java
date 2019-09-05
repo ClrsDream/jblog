@@ -18,8 +18,9 @@ public class Post {
     private Long id;
 
     // 用户id
-    @Column(name = "user_id")
-    private Long userId;
+    @JoinColumn(name = "user_id")
+    @OneToOne
+    private User user;
 
     // 帖子标题
     @NotEmpty
@@ -32,6 +33,9 @@ public class Post {
     @Length(min = 5, max = 100000)
     @Column(name = "content", nullable = false, columnDefinition = "mediumtext")
     private String content;
+
+    @Column(name = "read_num", nullable = false, columnDefinition = "bigint(15) default 0")
+    private Long readNum;
 
     // 帖子创建时间
     @CreatedDate
@@ -48,8 +52,8 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishedAt;
 
-    public Post(Long userId, String title, String content, Date createdAt, Date updatedAt, Date publishedAt) {
-        this.userId = userId;
+    public Post(User user, @NotEmpty @Length(min = 2, max = 200) String title, @NotEmpty @Length(min = 5, max = 100000) String content, Date createdAt, Date updatedAt, Date publishedAt) {
+        this.user = user;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
@@ -61,6 +65,14 @@ public class Post {
 
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
@@ -69,12 +81,17 @@ public class Post {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", user=" + user +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", publishedAt=" + publishedAt +
+                '}';
     }
 
     public String getTitle() {
@@ -117,16 +134,4 @@ public class Post {
         this.publishedAt = publishedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", publishedAt=" + publishedAt +
-                '}';
-    }
 }

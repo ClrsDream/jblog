@@ -2,6 +2,7 @@ package com.xiaoteng.blog.config;
 
 import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.UserService;
+import com.xiaoteng.blog.utils.Markdown;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
@@ -16,6 +17,7 @@ public class ThymeleafShareConfig {
         if (viewResolver != null) {
             viewResolver.addStaticVariable("router", new WebRouter());
             viewResolver.addStaticVariable("userService", new UserService());
+            viewResolver.addStaticVariable("md", new Markdown());
         }
     }
 
