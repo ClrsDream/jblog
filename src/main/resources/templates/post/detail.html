@@ -10,7 +10,7 @@
             [[${post.getTitle()}]]
         </h1>
         <div class="flex">
-            <a href="#">
+            <a th:href="@{${router.MEMBER_DETAIL}(id=${post.getUser().getId()})}">
                 <img th:src="${post.getUser().getAvatar()}" class="w-12 h-12 mt-1 mb-1 border-2 border-gray-700 rounded-full">
             </a>
             <div class="ml-2 text-gray-500">
@@ -18,11 +18,10 @@
                 <span class="text-sm">[(${md.toHTML(post.getUser().getIntro())})]</span>
             </div>
         </div>
-        <div class="py-5">
-            <a class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">PHP</a>
-            <a class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">Java</a>
+        <div class="pt-5" th:if="${post.getTags().size() > 0}">
+            <a th:each="tag : ${post.getTags()}" href="#" class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">[[${tag.getName()}]]</a>
         </div>
-        <div id="content" class="leading-loose text-gray-500">[(${post.getContent()})]</div>
+        <div id="content" class="leading-loose text-gray-500 pt-5">[(${post.getContent()})]</div>
 
         <div class="max-w-2xl mx-auto mt-10 border-2 border-gray-900 mb-10 rounded-lg">
             <div class="w-full text-gray-500 px-3 py-2 bg-gray-900 text-indigo-500">下面的的文章您可能也感兴趣</div>

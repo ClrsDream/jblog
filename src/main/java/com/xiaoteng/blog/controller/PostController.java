@@ -7,14 +7,13 @@ import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.PostService;
 import com.xiaoteng.blog.service.UserService;
 import com.xiaoteng.blog.utils.Helper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,6 +22,8 @@ import java.util.Objects;
 
 @Controller
 public class PostController extends BaseController {
+
+    private final static Logger log = LoggerFactory.getLogger(PostController.class);
 
     @Autowired
     private PostService postService;
@@ -38,7 +39,8 @@ public class PostController extends BaseController {
     @PostMapping(WebRouter.POST_CREATE)
     public RedirectView store(RedirectAttributes redirectAttributes,
                               @Valid @ModelAttribute Post post,
-                              BindingResult bindingResult) {
+                              BindingResult bindingResult,
+                              @RequestParam(name = "tagStr", defaultValue = "") String tagStr) {
         if (bindingResult.hasErrors()) {
             return error(WebRouter.POST_CREATE, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
         }
@@ -47,7 +49,9 @@ public class PostController extends BaseController {
             // 过滤xss之后为空
             return error(WebRouter.POST_CREATE, "文章内容不能为空", redirectAttributes);
         }
-        postService.createPost(post, content, userService.getUser());
+        String[] tagArr = tagStr.split(" ", 5);
+        log.info("{}", tagArr);
+        postService.createPost(post, content, userService.getUser(), tagArr);
 
         return super.success(WebRouter.INDEX, "添加成功", redirectAttributes);
     }

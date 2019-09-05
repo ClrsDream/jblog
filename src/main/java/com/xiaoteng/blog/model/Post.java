@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -52,17 +53,21 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishedAt;
 
-    public Post(User user, @NotEmpty @Length(min = 2, max = 200) String title, @NotEmpty @Length(min = 5, max = 100000) String content, Date createdAt, Date updatedAt, Date publishedAt) {
-        this.user = user;
-        this.title = title;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.publishedAt = publishedAt;
-    }
+    // 关联的标签
+    @JoinTable(name = "post_tag", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @ManyToMany
+    private List<Tag> tags;
 
     public Post() {
 
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public Long getReadNum() {
