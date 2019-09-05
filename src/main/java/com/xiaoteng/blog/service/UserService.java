@@ -25,6 +25,11 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
+    public User findUserById(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        return optionalUser.orElse(null);
+    }
+
     public User findUserByNickname(String nickname) {
         Optional<User> optionalUser = userRepository.findByNickname(nickname);
         return optionalUser.orElse(null);

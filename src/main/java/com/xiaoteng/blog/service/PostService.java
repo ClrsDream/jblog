@@ -3,7 +3,7 @@ package com.xiaoteng.blog.service;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.PostRepository;
-import com.xiaoteng.blog.service.query.PostPaginateQuery;
+import com.xiaoteng.blog.service.query.PostQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,21 +24,21 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public Page<Post> paginateOrderByPublishedAtDesc(int page, int pageSize, PostPaginateQuery query) {
+    public Page<Post> paginateOrderByPublishedAtDesc(int page, int pageSize, PostQuery query) {
         return paginate(page, pageSize, "publishedAt", Sort.Direction.DESC, query);
     }
 
-    public Page<Post> paginateOrderByReadNumDesc(int page, int pageSize, PostPaginateQuery query) {
+    public Page<Post> paginateOrderByReadNumDesc(int page, int pageSize, PostQuery query) {
         return paginate(page, pageSize, "readNum", Sort.Direction.DESC, query);
     }
 
-    public Page<Post> paginate(int pageNo, int pageSize, String orderField, Sort.Direction direction, PostPaginateQuery query) {
+    public Page<Post> paginate(int pageNo, int pageSize, String orderField, Sort.Direction direction, PostQuery query) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(direction, orderField));
         Page<Post> page = postRepository.findAll(new Specification<Post>() {
             @Override
             public Predicate toPredicate(Root<Post> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                if (null != query && query.getUserId() > 0) {
-                    Predicate p1 = criteriaBuilder.equal(root.get("user_id").as(String.class), query.getUserId());
+                if (null != query && null != query.getUser()) {
+                    Predicate p1 = criteriaBuilder.equal(root.get("user").as(User.class), query.getUser());
                     criteriaQuery.where(criteriaBuilder.and(p1));
                 }
                 return criteriaQuery.getRestriction();
