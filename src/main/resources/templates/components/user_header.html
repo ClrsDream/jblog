@@ -18,8 +18,10 @@
                 <a th:href="@{https://github.com/{id}(id=${userService.getUser().getGithub()})}"
                    th:if="${userService.getUser().getGithub()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-github"></i></a>
                 <br>
-                <a th:href="@{${router.POST_CREATE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500"><i class="fa fa-edit"></i> 写文章</a>
-                <a th:href="@{${router.HOME_PROFILE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 mr-3"><i class="fa fa-cogs"></i> 编辑个人资料</a>
+                <a th:href="@{${router.LOGOUT}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 ml-2"><i class="fa fa-power-off"></i> 退出</a>
+                <a th:href="@{${router.HOME_CHANGE_PASSWORD}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 ml-2"><i class="fa fa-lock"></i> 密码</a>
+                <a th:href="@{${router.HOME_PROFILE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 ml-2"><i class="fa fa-cogs"></i> 资料</a>
+                <a th:href="@{${router.POST_CREATE}}" class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 ml-2"><i class="fa fa-edit"></i> 写文章</a>
             </div>
         </div>
     </div>
