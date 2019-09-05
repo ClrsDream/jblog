@@ -1,6 +1,7 @@
 package com.xiaoteng.blog.service;
 
 import com.xiaoteng.blog.model.Post;
+import com.xiaoteng.blog.model.Tag;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.PostRepository;
 import com.xiaoteng.blog.service.query.PostQuery;
@@ -16,6 +17,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +26,9 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private TagService tagService;
 
     public Page<Post> paginateOrderByPublishedAtDesc(int page, int pageSize, PostQuery query) {
         return paginate(page, pageSize, "publishedAt", Sort.Direction.DESC, query);
@@ -47,13 +53,24 @@ public class PostService {
         return page;
     }
 
-    public void createPost(Post post, String content, User user) {
+    public void createPost(Post post, String content, User user, String[] tagArr) {
         Post post1 = new Post();
         post1.setUser(user);
         post1.setTitle(post.getTitle());
         post1.setContent(content);
         post1.setPublishedAt(post.getPublishedAt());
         post1.setReadNum(0L);
+
+        // 保存标签
+        if (tagArr.length > 0) {
+            List<Tag> tags = new LinkedList<>();
+            for (String tagStr : tagArr) {
+                Tag tag = tagService.createTagFromName(tagStr);
+                tags.add(tag);
+            }
+            post1.setTags(tags);
+        }
+
         postRepository.save(post1);
     }
 

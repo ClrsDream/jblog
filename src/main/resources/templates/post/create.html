@@ -24,7 +24,7 @@
         <div>
             <div class="pt-6">
                 <form th:action="@{${router.POST_CREATE}}" method="post" onsubmit="return submitHandler()">
-                    <div>
+                    <div class="mb-1">
                         <input type="text" placeholder="文章标题" name="title" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                     </div>
                     <div>
@@ -33,10 +33,14 @@
                             <textarea name="content"></textarea>
                         </div>
                     </div>
+                    <div class="mt-1">
+                        <input type="text" placeholder="文章标签" name="tagStr" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
+                        <span class="text-sm text-gray-600"><i class="fa fa-info"></i> 文章标签，多个标签请用空格分开，最多5个。</span>
+                    </div>
                     <div>
                         <input type="text" placeholder="文章发布时间" id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                     </div>
-                    <div class="mt-10">
+                    <div class="mt-6">
                         <button type="submit" class="block float-right px-3 py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 focus:outline-none">发布文章</button>
                     </div>
                 </form>
