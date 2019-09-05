@@ -1,0 +1,16 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
+<head>
+    <title>全部标签</title>
+</head>
+<body>
+<div id="content">
+    <div class="max-w-2xl mx-auto">
+        <h3 class="text-xl text-gray-400 py-3">全部标签</h3>
+        <div class="min-h-screen">
+            <a th:each="tag : ${tags}" class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">[[${tag.getName()}]]</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
