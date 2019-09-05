@@ -23,4 +23,6 @@ public class WebRouter {
 
     public final static String UPLOAD_IMAGE = "/upload/image";
 
+    public final static String MEMBER_DETAIL = "/member/{id}";
+
 }
