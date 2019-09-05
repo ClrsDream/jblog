@@ -55,4 +55,9 @@ public class UserService {
         return newUser;
     }
 
+    public void setPassword(User user, String password) {
+        user.setPassword(HashTool.encode(password));
+        userRepository.save(user);
+    }
+
 }
