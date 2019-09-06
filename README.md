@@ -1,5 +1,5 @@
 
-## 基于 Spring Boot 开发的文章发布系统
+## **JBlog** - 基于 Spring Boot 开发的文章发布系统
 
 #### 安装
 
