@@ -21,16 +21,27 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 
 #### 主要功能
 
-#### 技术点
-
-+ [x] Spring Boot
-+ [x] 视图继承
-+ [ ] 定时备份
++ [x] 邮箱登录/注册
++ [ ] 邮箱密码找回
++ [x] 文章管理
++ [x] 文章标签
++ [ ] 站内消息
++ [ ] 文章评论
++ [ ] 文章收藏
 + [ ] SEO定时提交
-+ [ ] Redis全站缓存
-+ [ ] 单元测试
++ [ ] 数据库定时备份
++ [ ] 多驱动图片上传
 + [ ] 图形验证码
-+ [ ] job任务队列
++ [ ] CSRF安全防范
++ [ ] 单元测试
++ [ ] 全文搜索
+
+#### 技术栈
+
++ Spring Boot / Thymeleaf / Hibernate
++ Mysql / Redis / Quartz
++ Shiro / Makrdown / XssClean
++ Git
 
 #### 扩展包
 

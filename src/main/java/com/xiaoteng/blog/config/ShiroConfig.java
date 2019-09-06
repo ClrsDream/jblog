@@ -15,8 +15,8 @@ public class ShiroConfig {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
 
         chainDefinition.addPathDefinition("/", "anon");
-        chainDefinition.addPathDefinition("/new", "anon");
-        chainDefinition.addPathDefinition("/hot", "anon");
+        chainDefinition.addPathDefinition("/t/new", "anon");
+        chainDefinition.addPathDefinition("/t/hot", "anon");
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/login", "anon");
         chainDefinition.addPathDefinition("/post/*", "anon");
