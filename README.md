@@ -38,6 +38,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 
 #### 技术栈
 
++ Tailwind / Webpack / React
 + Spring Boot / Thymeleaf / Hibernate
 + Git / Mysql / Redis / Quartz / Algolia
 + Shiro / Markdown / Xss Clean
