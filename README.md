@@ -54,6 +54,13 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `org.jsoup` | xss安全过滤 |
 | `com.youbenzi.MDTool` | Markdown解析，用于支持用户简介的Markdown语法 |
 
+#### 注解
+
+| 注解 | 作用 |
+| --- | --- |
+| `@LoginRedirect` | 已登录检测，已登录完成之后跳转到首页 |
+| `@PostReadNumInc` | 文章阅读量+1 |
+
 #### License
 
 **JBlog** 采用 MIT 开源许可证，你可以在商业项目中免费使用 **JBlog** 或者基于 **JBlog** 二次 开发而不必支付费用。
