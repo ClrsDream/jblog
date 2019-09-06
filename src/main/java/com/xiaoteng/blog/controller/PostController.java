@@ -71,10 +71,12 @@ public class PostController extends BaseController {
         List<User> favUsers = post.getFavUsers();
         // 当前登录用户是否喜欢该文章
         boolean fav = false;
-        for (User favUser : favUsers) {
-            if (favUser.getId().equals(userService.getUser().getId())) {
-                fav = true;
-                break;
+        if (null != userService.getUser()) {
+            for (User favUser : favUsers) {
+                if (favUser.getId().equals(userService.getUser().getId())) {
+                    fav = true;
+                    break;
+                }
             }
         }
         modelMap.addAttribute("fav", fav);
