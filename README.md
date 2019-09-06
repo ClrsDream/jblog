@@ -38,6 +38,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 
 #### 技术栈
 
++ Tailwind / Webpack / React
 + Spring Boot / Thymeleaf / Hibernate
 + Git / Mysql / Redis / Quartz / Algolia
 + Shiro / Markdown / Xss Clean
@@ -52,6 +53,13 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `spring-boot-starter-security` | 用于用户的password字段加密（`BCryptPasswordEncoder`）|
 | `org.jsoup` | xss安全过滤 |
 | `com.youbenzi.MDTool` | Markdown解析，用于支持用户简介的Markdown语法 |
+
+#### 注解
+
+| 注解 | 作用 |
+| --- | --- |
+| `@LoginRedirect` | 已登录检测，已登录完成之后跳转到首页 |
+| `@PostReadNumInc` | 文章阅读量+1 |
 
 #### License
 
