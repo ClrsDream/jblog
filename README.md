@@ -39,9 +39,8 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 #### 技术栈
 
 + Spring Boot / Thymeleaf / Hibernate
-+ Mysql / Redis / Quartz
-+ Shiro / Makrdown / XssClean
-+ Git
++ Git / Mysql / Redis / Quartz / Algolia
++ Shiro / Markdown / Xss Clean
 
 #### 扩展包
 
