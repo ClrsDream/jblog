@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +43,12 @@ public class PostService {
         Page<Post> page = postRepository.findAll(new Specification<Post>() {
             @Override
             public Predicate toPredicate(Root<Post> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                if (null != query && null != query.getUser()) {
-                    Predicate p1 = criteriaBuilder.equal(root.get("user").as(User.class), query.getUser());
-                    criteriaQuery.where(criteriaBuilder.and(p1));
+                if (null != query) {
+                    // 用户过滤
+                    if (null != query.getUser()) {
+                        Predicate p1 = criteriaBuilder.equal(root.get("user").as(User.class), query.getUser());
+                        criteriaQuery.where(criteriaBuilder.and(p1));
+                    }
                 }
                 return criteriaQuery.getRestriction();
             }
@@ -63,7 +66,7 @@ public class PostService {
 
         // 保存标签
         if (tagArr.length > 0) {
-            List<Tag> tags = new LinkedList<>();
+            List<Tag> tags = new ArrayList<>();
             for (String tagStr : tagArr) {
                 Tag tag = tagService.createTagFromName(tagStr);
                 tags.add(tag);

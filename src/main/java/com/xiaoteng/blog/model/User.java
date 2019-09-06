@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
@@ -71,13 +72,19 @@ public class User implements Serializable {
     @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedAt;
 
-    public User(@NotEmpty @Length(min = 6, max = 32) String email, @NotEmpty @Length(min = 6, max = 16) String password, Integer status) {
-        this.email = email;
-        this.password = password;
-        this.status = status;
-    }
+    @JoinTable(name = "user_post_favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
+    @ManyToMany
+    private List<Post> favoritePosts;
 
     public User() {
+    }
+
+    public List<Post> getFavoritePosts() {
+        return favoritePosts;
+    }
+
+    public void setFavoritePosts(List<Post> favoritePosts) {
+        this.favoritePosts = favoritePosts;
     }
 
     public String getWeibo() {

@@ -1,6 +1,7 @@
 package com.xiaoteng.blog.service;
 
 import com.xiaoteng.blog.enums.UserStatusEnum;
+import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
 import com.xiaoteng.blog.utils.HashTool;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -62,6 +64,18 @@ public class UserService {
 
     public void setPassword(User user, String password) {
         user.setPassword(HashTool.encode(password));
+        userRepository.save(user);
+    }
+
+    public void updateFavPost(Long id, Post post) {
+        User user = findUserById(id);
+        List<Post> favPosts = user.getFavoritePosts();
+        if (favPosts.contains(post)) {
+            favPosts.remove(post);
+        } else {
+            favPosts.add(post);
+        }
+        user.setFavoritePosts(favPosts);
         userRepository.save(user);
     }
 

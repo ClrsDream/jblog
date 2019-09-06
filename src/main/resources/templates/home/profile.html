@@ -12,19 +12,19 @@
             <div class="pt-10">
                 <form th:action="@{${router.HOME_PROFILE}}" method="post">
                     <div>
-                        <input type="text" th:value="${userService.getUser().getGithub()}"
+                        <input type="text" th:value="${user.getGithub()}"
                                name="github" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" placeholder="Github">
                     </div>
                     <div>
-                        <input type="text" th:value="${userService.getUser().getWeibo()}"
+                        <input type="text" th:value="${user.getWeibo()}"
                                name="weibo" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" placeholder="微博">
                     </div>
                     <div>
-                        <input type="text" th:value="${userService.getUser().getQq()}"
+                        <input type="text" th:value="${user.getQq()}"
                                name="qq" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" placeholder="QQ">
                     </div>
                     <div>
-                        <textarea name="intro" placeholder="个人简介" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" rows="4">[[${userService.getUser().getIntro()}]]</textarea>
+                        <textarea name="intro" placeholder="个人简介" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800" rows="4">[[${user.getIntro()}]]</textarea>
                         <p class="text-sm text-gray-600"><i class="fa fa-info mr-1"></i>支持markdown语法哦</p>
                     </div>
                     <div class="mt-10">

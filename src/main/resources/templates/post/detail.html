@@ -22,9 +22,19 @@
             <a th:each="tag : ${post.getTags()}" href="#" class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">[[${tag.getName()}]]</a>
         </div>
         <div id="content" class="leading-loose text-gray-500 pt-5">[(${post.getContent()})]</div>
+        
+        <div class="w-full py-8 text-center">
+            <span id="favorite-button" class="inline-block px-5 py-3 text-2xl border border-gray-500 text-gray-500 rounded-lg">
+                <i class="fa" th:classappend="${fav} ? 'fa-heart' : 'fa-heart-o'"></i><br>
+                喜欢
+            </span>
+        </div>
+        <div class="w-full mt-1 text-center">
+            <img th:each="user : ${favUsers}" th:src="${user.getAvatar()}" th:alt="${user.getNickname()}" class="inline-block w-8 h-8 mr-2 mb-2 border-2 border-gray-500 rounded-full">
+        </div>
 
-        <div class="max-w-2xl mx-auto mt-10 border-2 border-gray-900 mb-10 rounded-lg">
-            <div class="w-full text-gray-500 px-3 py-2 bg-gray-900 text-indigo-500">下面的的文章您可能也感兴趣</div>
+        <div class="w-full mt-10 border-2 border-gray-900 mb-10 rounded-lg">
+            <div class="w-full text-gray-500 px-3 py-2 bg-gray-900 text-gray-500">下面的的文章您可能也感兴趣</div>
             <div class="pl-8 py-2">
                 <ul class="list-disc">
                     <li class="leading-loose">
@@ -33,6 +43,25 @@
                 </ul>
             </div>
         </div>
+
+        <script>
+            $(function () {
+                $('#favorite-button').click(function () {
+                    $.post("[[${router.POST_FAVORITE}]]", {
+                        id: "[[${post.getId()}]]"
+                    }, function (res) {
+                        if (res === 0) {
+                            // 操作成功
+                            if ($('#favorite-button i').hasClass("fa-heart")) {
+                                $('#favorite-button i').removeClass('fa-heart').addClass('fa-heart-o');
+                            } else {
+                                $('#favorite-button i').removeClass('fa-heart-o').addClass('fa-heart');
+                            }
+                        }
+                    }, 'json');
+                });
+            });
+        </script>
     </div>
 </div>
 </body>

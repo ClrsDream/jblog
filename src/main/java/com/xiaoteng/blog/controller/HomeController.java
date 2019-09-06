@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+
 @Controller
 public class HomeController extends BaseController {
 
@@ -56,6 +58,8 @@ public class HomeController extends BaseController {
 
     @GetMapping(WebRouter.HOME_PROFILE)
     public String profile(ModelMap modelMap) {
+        User user = userService.findUserById(userService.getUser().getId());
+        modelMap.addAttribute("user", user);
         modelMap.addAttribute("active", "profile");
         return "home/profile";
     }
@@ -101,6 +105,14 @@ public class HomeController extends BaseController {
         // 修改密码
         userService.setPassword(user, newPassword);
         return success(WebRouter.HOME_CHANGE_PASSWORD, "密码修改成功", redirectAttributes);
+    }
+
+    @GetMapping(WebRouter.HOME_FAVORITE)
+    public String favorite(ModelMap modelMap) {
+        User user = userService.findUserById(userService.getUser().getId());
+        List<Post> posts = user.getFavoritePosts();
+        modelMap.addAttribute("posts", posts);
+        return "home/favorite";
     }
 
 }

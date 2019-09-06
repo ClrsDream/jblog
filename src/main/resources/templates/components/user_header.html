@@ -32,7 +32,7 @@
                 <a th:href="@{${router.HOME}}"><i class="fa fa-copy"></i> 我的文章</a>
             </div>
             <div class="flex-initial mr-5 hover:text-indigo-500 text-gray-500">
-                <a href="#"><i class="fa fa-heart"></i> 我的收藏</a>
+                <a th:href="@{${router.HOME_FAVORITE}}"><i class="fa fa-heart"></i> 我的喜欢</a>
             </div>
             <div class="flex-initial mr-5 hover:text-indigo-500" th:classappend="${active} eq 'profile' ? 'text-indigo-500': 'text-gray-500'">
                 <a th:href="@{${router.HOME_PROFILE}}"><i class="fa fa-cogs"></i> 个人资料</a>

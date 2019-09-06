@@ -24,5 +24,10 @@ public class WebRouter {
     public final static String UPLOAD_IMAGE = "/upload/image";
     // 会员主页
     public final static String MEMBER_DETAIL = "/member/{id}";
-
+    // 分类
+    public final static String TAG_INDEX = "/tags";
+    // 喜欢文章
+    public final static String POST_FAVORITE = "/post/favorite";
+    // 我的喜欢
+    public final static String HOME_FAVORITE = "/home/favorite";
 }

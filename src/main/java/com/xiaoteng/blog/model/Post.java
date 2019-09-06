@@ -58,8 +58,20 @@ public class Post {
     @ManyToMany
     private List<Tag> tags;
 
+    @JoinTable(name = "user_post_favorite", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ManyToMany
+    private List<User> favUsers;
+
     public Post() {
 
+    }
+
+    public List<User> getFavUsers() {
+        return favUsers;
+    }
+
+    public void setFavUsers(List<User> favUsers) {
+        this.favUsers = favUsers;
     }
 
     public List<Tag> getTags() {
