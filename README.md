@@ -47,6 +47,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 
 | 扩展包 | 应用 |
 | --- | --- |
+| `org.apache.shiro` | 用户的Authentication，Authorization支持 |
 | `spring-boot-starter-data-redis` | 用于session存储 |
 | `aliyun-java-sdk-dm` | 阿里云邮件发送，用于用户密码找回的邮件发送，欢迎邮件等 |
 | `spring-boot-starter-security` | 用于用户的password字段加密（`BCryptPasswordEncoder`）|
