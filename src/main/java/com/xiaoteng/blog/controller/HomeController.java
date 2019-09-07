@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -114,6 +115,17 @@ public class HomeController extends BaseController {
         modelMap.addAttribute("posts", posts);
         modelMap.addAttribute("active", "favorite");
         return "home/favorite";
+    }
+
+    @ResponseBody
+    @PostMapping(WebRouter.POST_FAVORITE)
+    public String addFavorite(@RequestParam(name = "id", defaultValue = "") Long postId) {
+        Post post = postService.findById(postId);
+        if (null == post) {
+            return "404";
+        }
+        userService.updateFavPost(userService.getUser().getId(), post);
+        return "0";
     }
 
 }
