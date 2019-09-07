@@ -15,13 +15,19 @@
             <div class="float-left w-full">
                 <a th:href="@{https://weibo.com/{id}(id=${userService.getUser().getWeibo()})}"
                    title="微博"
-                   th:if="${userService.getUser().getWeibo()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-weibo"></i></a>
+                   th:if="${userService.getUser().getWeibo()}" target="_blank" class="inline-block float-right text-gray-500 ml-3">
+                    <i class="fa fa-weibo"></i>
+                </a>
                 <a th:href="@{https://github.com/{id}(id=${userService.getUser().getGithub()})}"
                    title="Github"
-                   th:if="${userService.getUser().getGithub()}" target="_blank" class="inline-block float-right text-gray-500 ml-3"><i class="fa fa-github"></i></a>
+                   th:if="${userService.getUser().getGithub()}" target="_blank" class="inline-block float-right text-gray-500 ml-3">
+                    <i class="fa fa-github"></i>
+                </a>
                 <br>
                 <a th:href="@{${router.POST_CREATE}}"
-                   class="inline-block float-right px-3 py-1 border-2 border-gray-500 rounded-lg mt-3 text-gray-500 hover:border-indigo-400 hover:bg-indigo-500 hover:text-gray-200"><i class="fa fa-edit"></i> 写文章</a>
+                   class="float-right py-1 px-2 mt-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600">
+                    <i class="fa fa-edit"></i>写文章
+                </a>
             </div>
         </div>
     </div>
@@ -31,7 +37,7 @@
             <div class="flex-initial mr-5 hover:text-indigo-500" th:classappend="${active} eq 'index' ? 'text-indigo-500': 'text-gray-500'">
                 <a th:href="@{${router.HOME}}"><i class="fa fa-copy"></i> 我的文章</a>
             </div>
-            <div class="flex-initial mr-5 hover:text-indigo-500 text-gray-500">
+            <div class="flex-initial mr-5 hover:text-indigo-500" th:classappend="${active} eq 'favorite' ? 'text-indigo-500': 'text-gray-500'">
                 <a th:href="@{${router.HOME_FAVORITE}}"><i class="fa fa-heart"></i> 我的喜欢</a>
             </div>
             <div class="flex-initial mr-5 hover:text-indigo-500" th:classappend="${active} eq 'profile' ? 'text-indigo-500': 'text-gray-500'">

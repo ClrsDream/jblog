@@ -61,6 +61,17 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `@LoginRedirect` | 已登录检测，已登录完成之后跳转到首页 |
 | `@PostReadNumInc` | 文章阅读量+1 |
 
+#### 前端样式
+
+| 组件 | class |
+| --- | --- |
+| 主背景色 | `bg-gray-800` |
+| 次背景色 | `bg-gray-900` |
+| 主字体颜色 | `text-gray-500` |
+| 突出字体颜色 | `test-gray-400` |
+| 按钮 | `block w-full py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600` |
+| 输入框 | `w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800` |
+
 #### License
 
 **JBlog** 采用 MIT 开源许可证，你可以在商业项目中免费使用 **JBlog** 或者基于 **JBlog** 二次 开发而不必支付费用。

@@ -112,6 +112,7 @@ public class HomeController extends BaseController {
         User user = userService.findUserById(userService.getUser().getId());
         List<Post> posts = user.getFavoritePosts();
         modelMap.addAttribute("posts", posts);
+        modelMap.addAttribute("active", "favorite");
         return "home/favorite";
     }
 
