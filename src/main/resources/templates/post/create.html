@@ -39,6 +39,7 @@
                     <div>
                         <input type="text" placeholder="文章发布时间" required id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                     </div>
+                    <div th:insert="/components/image_captcha :: image_captcha"></div>
                     <div class="mt-6">
                         <button type="submit" class="float-right py-2 px-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600">发布文章</button>
                     </div>
