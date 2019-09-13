@@ -35,7 +35,11 @@ public class CaptchaImageVerify {
             log.info("imageCaptchaVerifyFail:imageCode:{}", imageCaptcha);
             // 重定向到错误界面
             RedirectView redirectView = new RedirectView();
-            redirectView.setUrl(request.getRequestURI());
+            String url = request.getRequestURI();
+            if (request.getQueryString() != null && !request.getQueryString().isEmpty()) {
+                url = request.getRequestURI() + "?" + request.getQueryString();
+            }
+            redirectView.setUrl(url);
             redirectView.setContextRelative(true);
             // flash错误信息
             RedirectAttributes redirectAttributes = Helper.getRedirectAttributes(joinPoints.getArgs());
