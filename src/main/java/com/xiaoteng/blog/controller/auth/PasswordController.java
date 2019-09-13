@@ -8,7 +8,7 @@ import com.xiaoteng.blog.mails.PasswordFindMail;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.UserService;
-import com.xiaoteng.blog.utils.mail.AliyunMail;
+import com.xiaoteng.blog.utils.mail.SmtpMail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class PasswordController extends BaseController {
     private AppConfig appConfig;
 
     @Autowired
-    private AliyunMail aliyunMail;
+    private SmtpMail aliyunMail;
 
     @GetMapping(WebRouter.PASSWORD_FOUND)
     public String showPasswordFindPage() {

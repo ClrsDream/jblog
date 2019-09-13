@@ -31,7 +31,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [ ] SEO定时提交
 + [ ] 数据库定时备份
 + [ ] 多驱动图片上传(Native/阿里云oss/腾讯cos)
-+ [ ] 多驱动邮件发送(SMTP/阿里云)
++ [x] 多驱动邮件发送(SMTP/阿里云)
 + [x] 图形验证码
 + [x] CSRF/XSS
 + [ ] 单元测试
