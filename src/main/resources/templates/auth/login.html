@@ -12,19 +12,19 @@
         <div class="w-1/2 px-10">
             <h2 class="text-center text-indigo-500 text-3xl py-10">登录</h2>
             <form th:action="@{${router.LOGIN}}" method="post">
-                <div class="py-2">
+                <div class="py-1">
                     <input type="email" placeholder="邮箱" name="email" required class="w-full p-2 my-1 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                 </div>
-                <div class="py-2">
+                <div class="py-1">
                     <input type="password" placeholder="密码" name="password" required class="w-full p-2 my-1 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                 </div>
 
                 <div th:insert="/components/image_captcha :: image_captcha"></div>
 
-                <div class="py-2 text-gray-500">
+                <div class="py-1 text-gray-500">
                     <label><input type="checkbox" name="remember_me" value="1"> 记住我</label>
                 </div>
-                <div class="py-2">
+                <div class="py-1">
                     <button type="submit" class="block w-full pt-2 pb-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600">登录</button>
                 </div>
                 <div class="py-2 text-center text-gray-500">

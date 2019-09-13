@@ -10,7 +10,7 @@
             <img src="/assets/images/login-banner.jpg" class="object-cover object-center w-full h-full rounded-tl-lg rounded-bl-lg">
         </div>
         <div class="w-1/2 px-10">
-            <h2 class="text-center text-indigo-500 text-3xl py-10">注册</h2>
+            <h2 class="text-center text-indigo-500 text-3xl py-6">注册</h2>
             <form th:action="@{${router.REGISTER}}" method="post">
                 <div class="py-1">
                     <input type="email" placeholder="邮箱" name="email" required class="w-full p-2 my-1 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
@@ -24,6 +24,7 @@
                 <div class="py-1">
                     <input type="password" placeholder="再输入一次密码" name="password_confirmation" required class="w-full p-2 my-1 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                 </div>
+                <div th:insert="/components/image_captcha :: image_captcha"></div>
                 <div class="py-1">
                     <button type="submit" class="block w-full pt-2 pb-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600">注册</button>
                 </div>
