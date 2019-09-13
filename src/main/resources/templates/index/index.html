@@ -31,8 +31,11 @@
                         [[${post.getTitle()}]]
                     </a>
                     <p class="text-gray-600 py-2 text-sm leading-relaxed">[[${helper.sub(post.getContent())}]]</p>
-                    <div class="py-2 inline-block" th:if="${post.getTags().size() > 0}">
-                        <a th:each="tag : ${post.getTags()}" href="#" class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">[[${tag.getName()}]]</a>
+                    <div class="w-full py-2 text-gray-600 text-sm">
+                        <span class="mr-2"><i class="fa fa-eye"></i> [[${post.getReadNum()}]]</span>
+                        <span class="mr-2"><i class="fa fa-comment"></i> 0</span>
+                        <span class="mr-2"><i class="fa fa-heart"></i> [[${post.getFavUsers().size()}]]</span>
+                        <span class="mr-2"><i class="fa fa-calendar mr-1" aria-hidden="true"></i> [[${post.getPublishedAt()}]]</span>
                     </div>
                 </div>
             </div>

@@ -46,7 +46,12 @@
 
         <script>
             $(function () {
+                var isLogin = [[${userService.getUser() != null ? 1: 0}]];
                 $('#favorite-button').click(function () {
+                    if (!isLogin) {
+                        window.location.href = "[[${router.LOGIN}]]";
+                        return;
+                    }
                     $.post("[[${router.POST_FAVORITE}]]", {
                         id: "[[${post.getId()}]]"
                     }, function (res) {

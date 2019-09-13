@@ -84,15 +84,4 @@ public class PostController extends BaseController {
         return "/post/detail";
     }
 
-    @ResponseBody
-    @PostMapping(WebRouter.POST_FAVORITE)
-    public String addFavorite(@RequestParam(name = "id", defaultValue = "") Long postId) {
-        Post post = postService.findById(postId);
-        if (null == post) {
-            return "404";
-        }
-        userService.updateFavPost(userService.getUser().getId(), post);
-        return "0";
-    }
-
 }

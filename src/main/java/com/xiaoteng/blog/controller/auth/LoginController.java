@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller.auth;
 
+import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.LoginRedirect;
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.model.User;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class LoginController extends BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @GetMapping(WebRouter.LOGIN)
     @LoginRedirect
@@ -30,12 +31,14 @@ public class LoginController extends BaseController {
 
     @PostMapping(WebRouter.LOGIN)
     @LoginRedirect
-    public RedirectView loginHandle(RedirectAttributes redirectAttributes,
+    @CaptchaImageVerify
+    public RedirectView loginHandle(@RequestParam(name = "image_captcha", defaultValue = "") String imageCaptcha,
                                     @RequestParam(name = "email", defaultValue = "") String email,
                                     @RequestParam(name = "password", defaultValue = "") String password,
-                                    @RequestParam(name = "remember_me", defaultValue = "0") String rememberMe) {
+                                    @RequestParam(name = "remember_me", defaultValue = "0") String rememberMe,
+                                    RedirectAttributes redirectAttributes) {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
-            return super.error(WebRouter.LOGIN, "邮箱和密码不能为空", redirectAttributes);
+            return error(WebRouter.LOGIN, "邮箱和密码不能为空", redirectAttributes);
         }
         Subject currentUser = SecurityUtils.getSubject();
         try {
@@ -47,15 +50,15 @@ public class LoginController extends BaseController {
                 throw new AuthenticationException();
             }
 
-            return super.success(WebRouter.INDEX, "登录成功", redirectAttributes);
+            return success(WebRouter.INDEX, "登录成功", redirectAttributes);
         } catch (UnknownAccountException uae) {
-            return super.error(WebRouter.LOGIN, "邮箱不存在", redirectAttributes);
+            return error(WebRouter.LOGIN, "邮箱不存在", redirectAttributes);
         } catch (IncorrectCredentialsException ice) {
-            return super.error(WebRouter.LOGIN, "密码错误", redirectAttributes);
+            return error(WebRouter.LOGIN, "密码错误", redirectAttributes);
         } catch (LockedAccountException lae) {
-            return super.error(WebRouter.LOGIN, "用户被锁定，请稍后再试", redirectAttributes);
+            return error(WebRouter.LOGIN, "用户被锁定，请稍后再试", redirectAttributes);
         } catch (AuthenticationException ae) {
-            return super.error(WebRouter.LOGIN, "登录失败:" + ae.getMessage(), redirectAttributes);
+            return error(WebRouter.LOGIN, "登录失败:" + ae.getMessage(), redirectAttributes);
         }
     }
 

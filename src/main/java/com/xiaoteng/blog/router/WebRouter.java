@@ -27,7 +27,9 @@ public class WebRouter {
     // 分类
     public final static String TAG_INDEX = "/tags";
     // 喜欢文章
-    public final static String POST_FAVORITE = "/post/favorite";
+    public final static String POST_FAVORITE = "/home/post/favorite";
     // 我的喜欢
     public final static String HOME_FAVORITE = "/home/favorite";
+    // 图片验证码
+    public final static String CAPTCHA_IMAGE = "/captcha/image";
 }

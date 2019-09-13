@@ -17,9 +17,13 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/", "anon");
         chainDefinition.addPathDefinition("/t/new", "anon");
         chainDefinition.addPathDefinition("/t/hot", "anon");
+        chainDefinition.addPathDefinition("/tags", "anon");
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/login", "anon");
+        // 帖子界面
         chainDefinition.addPathDefinition("/post/*", "anon");
+        // 图片验证码
+        chainDefinition.addPathDefinition("/captcha/image", "anon");
         chainDefinition.addPathDefinition("/password/find", "anon");
         chainDefinition.addPathDefinition("/assets/**", "anon");
         chainDefinition.addPathDefinition("/favicon.ico", "anon");

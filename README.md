@@ -31,7 +31,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [ ] SEO定时提交
 + [ ] 数据库定时备份
 + [ ] 多驱动图片上传
-+ [ ] 图形验证码
++ [x] 图形验证码
 + [x] CSRF/XSS
 + [ ] 单元测试
 + [ ] 全文搜索
@@ -53,6 +53,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `spring-boot-starter-security` | 用于用户的password字段加密（`BCryptPasswordEncoder`）|
 | `org.jsoup` | xss安全过滤 |
 | `com.youbenzi.MDTool` | Markdown解析，用于支持用户简介的Markdown语法 |
+| `com.github.whvcse.easy-captcha` | 图片验证码 |
 
 #### 注解
 
@@ -60,6 +61,18 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | --- | --- |
 | `@LoginRedirect` | 已登录检测，已登录完成之后跳转到首页 |
 | `@PostReadNumInc` | 文章阅读量+1 |
+| `@CaptchaImageVerify` | 图片验证码校验 |
+
+#### 前端样式
+
+| 组件 | class |
+| --- | --- |
+| 主背景色 | `bg-gray-800` |
+| 次背景色 | `bg-gray-900` |
+| 主字体颜色 | `text-gray-500` |
+| 突出字体颜色 | `test-gray-400` |
+| 按钮 | `block w-full py-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600` |
+| 输入框 | `w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800` |
 
 #### License
 
