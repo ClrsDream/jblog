@@ -21,10 +21,11 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/login", "anon");
         // 帖子界面
-        chainDefinition.addPathDefinition("/post/*", "anon");
+        chainDefinition.addPathDefinition("/post/\\d+", "anon");
         // 图片验证码
         chainDefinition.addPathDefinition("/captcha/image", "anon");
         chainDefinition.addPathDefinition("/password/find", "anon");
+        chainDefinition.addPathDefinition("/password/reset", "anon");
         chainDefinition.addPathDefinition("/assets/**", "anon");
         chainDefinition.addPathDefinition("/favicon.ico", "anon");
 

@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller;
 
+import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.repositories.UserRepository;
@@ -66,6 +67,7 @@ public class HomeController extends BaseController {
     }
 
     @PostMapping(WebRouter.HOME_PROFILE)
+    @CaptchaImageVerify
     public RedirectView saveProfile(RedirectAttributes redirectAttributes,
                                     @RequestParam(name = "weibo", defaultValue = "") String weibo,
                                     @RequestParam(name = "github", defaultValue = "") String github,
@@ -88,6 +90,7 @@ public class HomeController extends BaseController {
     }
 
     @PostMapping(WebRouter.HOME_CHANGE_PASSWORD)
+    @CaptchaImageVerify
     public RedirectView changePasswordHandler(RedirectAttributes redirectAttributes,
                                               @RequestParam(name = "old_password", defaultValue = "") String oldPassword,
                                               @RequestParam(name = "new_password", defaultValue = "") String newPassword,

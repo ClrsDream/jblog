@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller.auth;
 
+import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.LoginRedirect;
 import com.xiaoteng.blog.controller.BaseController;
 import com.xiaoteng.blog.model.User;
@@ -35,6 +36,7 @@ public class AuthController extends BaseController {
 
     @PostMapping(WebRouter.REGISTER)
     @LoginRedirect
+    @CaptchaImageVerify
     public RedirectView registerHandle(RedirectAttributes redirectAttributes,
                                        @Valid @ModelAttribute User user,
                                        BindingResult bindingResult) {

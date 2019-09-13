@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.controller;
 
+import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.PostReadNumInc;
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
 import com.xiaoteng.blog.model.Post;
@@ -39,6 +40,7 @@ public class PostController extends BaseController {
     }
 
     @PostMapping(WebRouter.POST_CREATE)
+    @CaptchaImageVerify
     public RedirectView store(RedirectAttributes redirectAttributes,
                               @Valid @ModelAttribute Post post,
                               BindingResult bindingResult,

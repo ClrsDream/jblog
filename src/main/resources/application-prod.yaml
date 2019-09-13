@@ -29,7 +29,6 @@ spring:
     port: 6379
     password:
     database: 0
-
   # 模板配置
   thymeleaf:
     prefix: classpath:/templates/
@@ -47,6 +46,9 @@ shiro:
 
 # 博客项目配置
 blog:
+  app:
+    url: "http://127.0.0.1:8080"
+
   index:
     page-size: 30
   member:

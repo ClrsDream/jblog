@@ -10,6 +10,10 @@ public class WebRouter {
     public final static String LOGOUT = "/logout";
     // 注册界面
     public final static String REGISTER = "/register";
+    // 密码找回
+    public final static String PASSWORD_FOUND = "/password/find";
+    // 密码重置
+    public final static String PASSWORD_RESET = "/password/reset";
     // 会员首页
     public final static String HOME = "/home";
     // 资料编辑页面

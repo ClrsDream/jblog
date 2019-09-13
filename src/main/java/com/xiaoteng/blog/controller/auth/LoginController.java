@@ -32,11 +32,10 @@ public class LoginController extends BaseController {
     @PostMapping(WebRouter.LOGIN)
     @LoginRedirect
     @CaptchaImageVerify
-    public RedirectView loginHandle(@RequestParam(name = "image_captcha", defaultValue = "") String imageCaptcha,
+    public RedirectView loginHandle(RedirectAttributes redirectAttributes,
                                     @RequestParam(name = "email", defaultValue = "") String email,
                                     @RequestParam(name = "password", defaultValue = "") String password,
-                                    @RequestParam(name = "remember_me", defaultValue = "0") String rememberMe,
-                                    RedirectAttributes redirectAttributes) {
+                                    @RequestParam(name = "remember_me", defaultValue = "0") String rememberMe) {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
             return error(WebRouter.LOGIN, "邮箱和密码不能为空", redirectAttributes);
         }
