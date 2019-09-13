@@ -31,7 +31,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [ ] SEO定时提交
 + [ ] 数据库定时备份
 + [ ] 多驱动图片上传
-+ [ ] 图形验证码
++ [x] 图形验证码
 + [x] CSRF/XSS
 + [ ] 单元测试
 + [ ] 全文搜索
@@ -53,6 +53,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `spring-boot-starter-security` | 用于用户的password字段加密（`BCryptPasswordEncoder`）|
 | `org.jsoup` | xss安全过滤 |
 | `com.youbenzi.MDTool` | Markdown解析，用于支持用户简介的Markdown语法 |
+| `com.github.whvcse.easy-captcha` | 图片验证码 |
 
 #### 注解
 
@@ -60,6 +61,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | --- | --- |
 | `@LoginRedirect` | 已登录检测，已登录完成之后跳转到首页 |
 | `@PostReadNumInc` | 文章阅读量+1 |
+| `@CaptchaImageVerify` | 图片验证码校验 |
 
 #### 前端样式
 
