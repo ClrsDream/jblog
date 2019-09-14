@@ -17,18 +17,20 @@ create table `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `posts` (
-  `id` bigint(20) unsigned not null AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
   `content` mediumtext NOT NULL,
   `read_num` bigint(15) NOT NULL DEFAULT '0',
+  `comments_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论数量',
+  `user_fav_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户喜欢数量',
   `published_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id_key` (`user_id`),
   KEY `published_at_key` (`published_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `post_tag` (
   `post_id` bigint(20) NOT NULL,

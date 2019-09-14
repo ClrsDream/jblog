@@ -16,4 +16,6 @@ public interface PostMapper {
     List<Post> paginate(String sort, String direct, Long userId);
 
     Long count(Long userId);
+
+    Long userFavCount(Long postId);
 }

@@ -31,6 +31,12 @@ public class Post {
     // 阅读次数
     private Long readNum;
 
+    // 用户喜欢数量
+    private int userFavCount;
+
+    // 评论数量
+    private int commentsCount;
+
     // 帖子创建时间
     @CreatedDate
     private Date createdAt;
@@ -52,6 +58,22 @@ public class Post {
 
     public Post(Long id) {
         this.id = id;
+    }
+
+    public int getUserFavCount() {
+        return userFavCount;
+    }
+
+    public void setUserFavCount(int userFavCount) {
+        this.userFavCount = userFavCount;
+    }
+
+    public int getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(int commentsCount) {
+        this.commentsCount = commentsCount;
     }
 
     public User getUser() {

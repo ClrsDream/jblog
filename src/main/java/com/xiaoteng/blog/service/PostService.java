@@ -48,4 +48,8 @@ public class PostService {
         postMapper.readNumInc(post.getId());
     }
 
+    public Long userFavCount(Long postId) {
+        return postMapper.userFavCount(postId);
+    }
+
 }

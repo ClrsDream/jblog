@@ -20,6 +20,8 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readNum" column="read_num"/>
+        <result property="userFavCount" column="user_fav_count"/>
+        <result property="commentsCount" column="comments_count"/>
         <result property="publishedAt" column="published_at"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
@@ -61,6 +63,8 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readNum" column="read_num"/>
+        <result property="userFavCount" column="user_fav_count"/>
+        <result property="commentsCount" column="comments_count"/>
         <result property="publishedAt" column="published_at"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
@@ -99,6 +103,12 @@
         <if test="userId != null">
             AND p.user_id = #{userId}
         </if>
+    </select>
+
+    <select id="userFavCount" resultType="java.lang.Long" useCache="true">
+        select
+        COUNT(*) as count
+        FROM user_post_favorite where post_id = #{postId}
     </select>
 
 </mapper>
