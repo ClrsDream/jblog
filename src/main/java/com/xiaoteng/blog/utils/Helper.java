@@ -21,6 +21,9 @@ public class Helper {
     }
 
     public static String sub(String c) {
+        if (c == null) {
+            return "";
+        }
         // 先过滤html字符
         c = Jsoup.clean(c, Whitelist.none());
         if (c.length() <= 120) {

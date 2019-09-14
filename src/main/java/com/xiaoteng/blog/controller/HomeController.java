@@ -3,7 +3,6 @@ package com.xiaoteng.blog.controller;
 import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
-import com.xiaoteng.blog.repositories.UserRepository;
 import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.PostService;
 import com.xiaoteng.blog.service.UserService;
@@ -14,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +33,6 @@ public class HomeController extends BaseController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private PostService postService;
 
     @Value("${blog.member.page-size}")
@@ -50,7 +45,7 @@ public class HomeController extends BaseController {
         postQuery.setUser(userService.getUser());
         page = page <= 0 ? 1 : page;
         page -= 1;
-        Page<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
+        List<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
         log.info("查询结果：{}，查询条件：{}", posts, postQuery);
         modelMap.addAttribute("active", "index");
         modelMap.addAttribute("posts", posts);
@@ -114,7 +109,7 @@ public class HomeController extends BaseController {
     @GetMapping(WebRouter.HOME_FAVORITE)
     public String favorite(ModelMap modelMap) {
         User user = userService.findUserById(userService.getUser().getId());
-        List<Post> posts = user.getFavoritePosts();
+        List<Post> posts = null;
         modelMap.addAttribute("posts", posts);
         modelMap.addAttribute("active", "favorite");
         return "home/favorite";

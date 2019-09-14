@@ -11,10 +11,25 @@
         INSERT INTO tags (name) values (#{name})
     </insert>
 
-    <select id="findByName" parameterType="java.lang.String" resultType="Tag">
+    <select id="all" resultType="Tag">
+        SELECT
+        <include refid="tagColumns" />
+        from tags
+    </select>
+
+    <select id="findByName" resultType="Tag">
         SELECT
         <include refid="tagColumns" />
         from tags where name = #{name}
+    </select>
+
+    <select id="selectTagByPostId" resultType="Tag">
+        SELECT
+        t.id,
+        t.name
+        FROM  post_tag as pt
+        inner  join tags t on pt.tag_id = t.id
+        where pt.post_id = #{postId}
     </select>
 
 </mapper>

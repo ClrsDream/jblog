@@ -9,17 +9,96 @@
 
     <insert id="insert" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO posts (title,content,published_at,user_id,read_num) values
-        (#{title},#{content},#{published_at},#{user_id},#{read_num})
+        (#{title},#{content},#{publishedAt},#{userId},#{readNum})
     </insert>
 
-    <select id="findById" parameterType="java.lang.Long" resultType="Post">
+    <resultMap id="postDetail" type="Post">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long"/>
+        </constructor>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="readNum" column="read_num"/>
+        <result property="publishedAt" column="published_at"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <association property="user" javaType="User">
+            <id property="id" column="user_id"/>
+            <result property="nickname" column="user_nickname"/>
+            <result property="avatar" column="user_avatar"/>
+            <result property="intro" column="user_intro"/>
+        </association>
+    </resultMap>
+    <select id="findById" resultMap="postDetail">
         SELECT
-        <include refid="postColumns" />
-        from posts where id = #{id}
+        p.id,
+        p.title,
+        p.content,
+        p.user_id,
+        p.read_num,
+        p.published_at,
+        p.created_at,
+        p.updated_at,
+        u.id as user_id,
+        u.nickname as user_nickname,
+        u.avatar as user_avatar,
+        u.intro as user_intro
+        from posts as p
+        inner join users as u on p.user_id = u.id
+        where p.id = #{id}
     </select>
 
-    <update id="readNumInc" parameterType="java.lang.Long">
+    <update id="readNumInc">
         UPDATE posts set read_num = read_num + 1 where id = #{id}
     </update>
+
+    <resultMap id="postPaginateResult" type="Post">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long"/>
+        </constructor>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="readNum" column="read_num"/>
+        <result property="publishedAt" column="published_at"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <association property="user" javaType="User">
+            <id property="id" column="user_id"/>
+            <result property="nickname" column="user_nickname"/>
+            <result property="avatar" column="user_avatar"/>
+            <result property="intro" column="user_intro"/>
+        </association>
+    </resultMap>
+    <select id="paginate" resultMap="postPaginateResult">
+        SELECT
+        p.id,
+        p.title,
+        p.content,
+        p.user_id,
+        p.read_num,
+        p.published_at,
+        p.created_at,
+        p.updated_at,
+        u.id as user_id,
+        u.nickname as user_nickname,
+        u.avatar as user_avatar,
+        u.intro as user_intro
+        from posts as p
+        inner  join users as u on p.user_id = u.id
+        where 1=1
+        <if test="userId != null">
+            AND p.user_id = #{userId}
+        </if>
+        ORDER BY ${sort} ${direct}
+    </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select COUNT(*) as count from posts where 1 = 1
+        <if test="userId != null">
+            AND p.user_id = #{userId}
+        </if>
+    </select>
 
 </mapper>

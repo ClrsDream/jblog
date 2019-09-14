@@ -5,89 +5,53 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
-import java.util.List;
 
-@Entity
 @Table(name = "posts")
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    // 用户id
-    @JoinColumn(name = "user_id")
-    @OneToOne
-    private User user;
+    private Long userId;
 
     // 帖子标题
     @NotEmpty
     @Length(min = 2, max = 200)
-    @Column(name = "title", nullable = false)
     private String title;
 
     // 帖子内容
     @NotEmpty
     @Length(min = 5, max = 100000)
-    @Column(name = "content", nullable = false, columnDefinition = "mediumtext")
     private String content;
 
-    @Column(name = "read_num", nullable = false, columnDefinition = "bigint(15) default 0")
+    // 阅读次数
     private Long readNum;
 
     // 帖子创建时间
     @CreatedDate
-    @Column(name = "created_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     private Date createdAt;
 
     // 帖子最后编辑时间
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedAt;
 
     // 帖子发布时间
-    @Column(name = "published_at", nullable = false, columnDefinition = "timestamp")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishedAt;
 
-    // 关联的标签
-    @JoinTable(name = "post_tag", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    @ManyToMany
-    private List<Tag> tags;
-
-    @JoinTable(name = "user_post_favorite", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @ManyToMany
-    private List<User> favUsers;
+    // 作者
+    private User user;
 
     public Post() {
 
     }
 
-    public List<User> getFavUsers() {
-        return favUsers;
-    }
-
-    public void setFavUsers(List<User> favUsers) {
-        this.favUsers = favUsers;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public Long getReadNum() {
-        return readNum;
-    }
-
-    public void setReadNum(Long readNum) {
-        this.readNum = readNum;
+    public Post(Long id) {
+        this.id = id;
     }
 
     public User getUser() {
@@ -98,25 +62,28 @@ public class Post {
         this.user = user;
     }
 
+    public Long getReadNum() {
+        return readNum;
+    }
+
+    public void setReadNum(Long readNum) {
+        this.readNum = readNum;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", user=" + user +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", publishedAt=" + publishedAt +
-                '}';
     }
 
     public String getTitle() {
@@ -159,4 +126,17 @@ public class Post {
         this.publishedAt = publishedAt;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", readNum=" + readNum +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", publishedAt=" + publishedAt +
+                '}';
+    }
 }

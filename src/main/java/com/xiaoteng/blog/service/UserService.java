@@ -4,7 +4,7 @@ import com.xiaoteng.blog.enums.UserStatusEnum;
 import com.xiaoteng.blog.mappers.UserMapper;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
-import com.xiaoteng.blog.repositories.UserRepository;
+import com.xiaoteng.blog.model.UserPostFav;
 import com.xiaoteng.blog.utils.HashTool;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,6 @@ import java.util.List;
 
 @Service
 public class UserService {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Value("${blog.user.defaultAvatar}")
     private String defaultAvatar;
@@ -65,14 +62,18 @@ public class UserService {
 
     public void updateFavPost(Long id, Post post) {
         User user = findUserById(id);
-        List<Post> favPosts = user.getFavoritePosts();
-        if (favPosts.contains(post)) {
-            favPosts.remove(post);
+        // 判断是否存在记录
+        UserPostFav userPostFav = userMapper.findPostFav(user.getId(), post.getId());
+        if (userPostFav != null) {
+            // 记录不存在，那么就创建
+            userMapper.postFav(user.getId(), post.getId());
         } else {
-            favPosts.add(post);
+            userMapper.cancelPostFav(user.getId(), post.getId());
         }
-        user.setFavoritePosts(favPosts);
-        userRepository.save(user);
+    }
+
+    public List<User> selectFavUsers(Long postId) {
+        return userMapper.selectFavUsers(postId);
     }
 
 }

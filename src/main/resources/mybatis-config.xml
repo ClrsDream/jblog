@@ -7,6 +7,7 @@
         <typeAlias type="com.xiaoteng.blog.model.User" alias="User" />
         <typeAlias type="com.xiaoteng.blog.model.Post" alias="Post" />
         <typeAlias type="com.xiaoteng.blog.model.Tag" alias="Tag" />
+        <typeAlias type="com.xiaoteng.blog.model.UserPostFav" alias="UserPostFav" />
     </typeAliases>
     <mappers>
         <mapper resource="mybatis-mappers/PostMapper.xml"/>
