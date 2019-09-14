@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoteng.blog.mappers.PostMapper">
+
+    <sql id="postColumns">id,title,content,user_id,read_num,published_at,created_at,updated_at</sql>
+
+    <insert id="insert" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO posts (title,content,published_at,user_id,read_num) values
+        (#{title},#{content},#{published_at},#{user_id},#{read_num})
+    </insert>
+
+    <select id="findById" parameterType="java.lang.Long" resultType="Post">
+        SELECT
+        <include refid="postColumns" />
+        from posts where id = #{id}
+    </select>
+
+    <update id="readNumInc" parameterType="java.lang.Long">
+        UPDATE posts set read_num = read_num + 1 where id = #{id}
+    </update>
+
+</mapper>

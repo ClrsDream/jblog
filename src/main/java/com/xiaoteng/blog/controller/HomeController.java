@@ -78,7 +78,7 @@ public class HomeController extends BaseController {
         user.setGithub(github);
         user.setQq(qq);
         user.setIntro(Helper.clean(intro));
-        userRepository.save(user);
+        userService.updatePro(user);
 
         return success(WebRouter.HOME_PROFILE, "资料编辑成功", redirectAttributes);
     }
