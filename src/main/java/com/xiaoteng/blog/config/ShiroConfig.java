@@ -21,7 +21,7 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/login", "anon");
         // 帖子界面
-        chainDefinition.addPathDefinition("/post/\\d+", "anon");
+        chainDefinition.addPathDefinition("/post/*", "anon");
         // 图片验证码
         chainDefinition.addPathDefinition("/captcha/image", "anon");
         chainDefinition.addPathDefinition("/password/find", "anon");

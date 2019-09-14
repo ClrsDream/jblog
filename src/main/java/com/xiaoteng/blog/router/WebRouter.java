@@ -21,7 +21,7 @@ public class WebRouter {
     // 修改密码
     public final static String HOME_CHANGE_PASSWORD = "/home/changePassword";
     // 帖子创建
-    public final static String POST_CREATE = "/post/create";
+    public final static String POST_CREATE = "/post/create/index";
     // 帖子详情页
     public final static String POST_DETAIL = "/post/{id}";
     // 上传图片

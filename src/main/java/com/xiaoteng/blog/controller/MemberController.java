@@ -9,12 +9,13 @@ import com.xiaoteng.blog.service.UserService;
 import com.xiaoteng.blog.service.query.PostQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -40,7 +41,7 @@ public class MemberController {
         page -= 1;
         PostQuery postQuery = new PostQuery();
         postQuery.setUser(user);
-        Page<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
+        List<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("posts", posts);

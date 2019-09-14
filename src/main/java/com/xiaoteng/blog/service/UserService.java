@@ -1,9 +1,10 @@
 package com.xiaoteng.blog.service;
 
 import com.xiaoteng.blog.enums.UserStatusEnum;
+import com.xiaoteng.blog.mappers.UserMapper;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.User;
-import com.xiaoteng.blog.repositories.UserRepository;
+import com.xiaoteng.blog.model.UserPostFav;
 import com.xiaoteng.blog.utils.HashTool;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Value("${blog.user.defaultAvatar}")
     private String defaultAvatar;
 
+    @Autowired
+    private UserMapper userMapper;
+
     public User findUserByEmail(String email) {
-        Optional<User> optionalUser = userRepository.findByEmail(email);
-        return optionalUser.orElse(null);
+        return userMapper.findByEmail(email);
     }
 
     public User findUserById(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        return optionalUser.orElse(null);
+        return userMapper.findById(id);
     }
 
     public User findUserByNickname(String nickname) {
-        Optional<User> optionalUser = userRepository.findByNickname(nickname);
-        return optionalUser.orElse(null);
+        return userMapper.findByNickname(nickname);
     }
 
     /**
@@ -47,36 +44,36 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        User newUser = new User();
-        newUser.setEmail(user.getEmail());
-        newUser.setNickname(user.getNickname());
-        newUser.setPassword(HashTool.encode(user.getPassword()));
-        newUser.setStatus(UserStatusEnum.NORMAL.getStatus());
-        newUser.setAvatar(defaultAvatar);
-        newUser.setIntro("");
-        newUser.setQq("");
-        newUser.setGithub("");
-        newUser.setWeibo("");
-        userRepository.save(newUser);
+        user.setPassword(HashTool.encode(user.getPassword()));
+        user.setStatus(UserStatusEnum.NORMAL.getStatus());
+        user.setAvatar(defaultAvatar);
+        userMapper.insert(user);
 
-        return newUser;
+        return user;
+    }
+
+    public void updatePro(User user) {
+        userMapper.updatePro(user);
     }
 
     public void setPassword(User user, String password) {
-        user.setPassword(HashTool.encode(password));
-        userRepository.save(user);
+        userMapper.updatePassword(user.getId(), HashTool.encode(password));
     }
 
     public void updateFavPost(Long id, Post post) {
         User user = findUserById(id);
-        List<Post> favPosts = user.getFavoritePosts();
-        if (favPosts.contains(post)) {
-            favPosts.remove(post);
+        // 判断是否存在记录
+        UserPostFav userPostFav = userMapper.findPostFav(user.getId(), post.getId());
+        if (userPostFav != null) {
+            // 记录不存在，那么就创建
+            userMapper.postFav(user.getId(), post.getId());
         } else {
-            favPosts.add(post);
+            userMapper.cancelPostFav(user.getId(), post.getId());
         }
-        user.setFavoritePosts(favPosts);
-        userRepository.save(user);
+    }
+
+    public List<User> selectFavUsers(Long postId) {
+        return userMapper.selectFavUsers(postId);
     }
 
 }

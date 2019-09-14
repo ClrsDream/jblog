@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.xiaoteng.blog.model.User" alias="User" />
+        <typeAlias type="com.xiaoteng.blog.model.Post" alias="Post" />
+        <typeAlias type="com.xiaoteng.blog.model.Tag" alias="Tag" />
+        <typeAlias type="com.xiaoteng.blog.model.UserPostFav" alias="UserPostFav" />
+    </typeAliases>
+    <mappers>
+        <mapper resource="mybatis-mappers/PostMapper.xml"/>
+        <mapper resource="mybatis-mappers/UserMapper.xml"/>
+        <mapper resource="mybatis-mappers/TagMapper.xml"/>
+    </mappers>
+</configuration>

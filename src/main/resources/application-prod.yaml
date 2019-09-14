@@ -29,6 +29,7 @@ spring:
     port: 6379
     password:
     database: 0
+
   # 模板配置
   thymeleaf:
     prefix: classpath:/templates/
@@ -39,6 +40,13 @@ spring:
     mode: HTML5
     servlet:
       content-type: text/html
+
+  # 邮箱
+  mail:
+    host: smtp.sina.cn
+    username: ""
+    password: ""
+    port: 25
 
 # shiro
 shiro:

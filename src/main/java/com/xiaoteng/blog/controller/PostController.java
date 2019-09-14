@@ -4,9 +4,11 @@ import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.PostReadNumInc;
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
 import com.xiaoteng.blog.model.Post;
+import com.xiaoteng.blog.model.Tag;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.PostService;
+import com.xiaoteng.blog.service.TagService;
 import com.xiaoteng.blog.service.UserService;
 import com.xiaoteng.blog.utils.Helper;
 import org.slf4j.Logger;
@@ -33,6 +35,9 @@ public class PostController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TagService tagService;
 
     @GetMapping(WebRouter.POST_CREATE)
     public String create() {
@@ -68,20 +73,13 @@ public class PostController extends BaseController {
         if (null == post) {
             throw new PostNotFoundException();
         }
+        // 获取tags
+        List<Tag> tags = tagService.selectTags(post.getId());
+        // 获取喜欢的用户集合
+        List<User> favUsers = userService.selectFavUsers(post.getId());
+
         modelMap.addAttribute("post", post);
-        // 当前文章喜欢的用户
-        List<User> favUsers = post.getFavUsers();
-        // 当前登录用户是否喜欢该文章
-        boolean fav = false;
-        if (null != userService.getUser()) {
-            for (User favUser : favUsers) {
-                if (favUser.getId().equals(userService.getUser().getId())) {
-                    fav = true;
-                    break;
-                }
-            }
-        }
-        modelMap.addAttribute("fav", fav);
+        modelMap.addAttribute("tags", tags);
         modelMap.addAttribute("favUsers", favUsers);
         return "/post/detail";
     }

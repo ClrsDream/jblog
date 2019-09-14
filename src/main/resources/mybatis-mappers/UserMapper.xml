@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoteng.blog.mappers.UserMapper">
+
+    <sql id="userColumns">id,email,nickname,avatar,created_at,last_login_at,password,github,qq,weibo,intro</sql>
+
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `users` (`email`,`nickname`,`avatar`,`password`,`status`) values
+        (#{email},#{nickname},#{avatar},#{password},#{status})
+    </insert>
+
+    <!-- 根据id查找 -->
+    <select id="findById" parameterType="java.lang.Long" resultType="User">
+        SELECT
+        <include refid="userColumns" />
+        from users where id = #{id}
+    </select>
+
+    <!-- 根据邮箱查找 -->
+    <select id="findByEmail" parameterType="java.lang.String" resultType="User">
+        SELECT
+        <include refid="userColumns" />
+        from users where email = #{email}
+    </select>
+
+    <!-- 根据昵称查找 -->
+    <select id="findByNickname" parameterType="java.lang.String" resultType="User">
+        SELECT
+        <include refid="userColumns" />
+        from users where nickname = #{nickname}
+    </select>
+
+    <!-- 修改密码 -->
+    <update id="updatePassword" parameterType="User">
+        UPDATE users set password = #{password} where id = #{id}
+    </update>
+
+    <!-- 更新资料 -->
+    <update id="updatePro" parameterType="User">
+        UPDATE users set github = #{github},weibo = #{weibo}, qq = #{qq}, intro = #{intro} where id = #{id}
+    </update>
+
+    <!-- 喜欢帖子记录 -->
+    <select id="findPostFav" resultType="UserPostFav">
+        SELECT user_id,post_id from user_post_favorite where user_id = #{userId} and post_id = #{postId}
+    </select>
+
+    <!-- 喜欢帖子 -->
+    <insert id="postFav">
+        INSERT INTO user_post_favorite (user_id, post_id) values (#{userId}, #{postId})
+    </insert>
+
+    <!-- 不喜欢帖子 -->
+    <delete id="cancelPostFav">
+        delete from user_post_favorite where user_id = #{userId} and post_id = #{postId}
+    </delete>
+
+    <select id="selectFavUsers" resultType="User">
+        SELECT
+        u.id,
+        u.nickname,
+        u.avatar
+        FROM user_post_favorite as  upf
+        inner join users u on upf.user_id = u.id
+        where upf.post_id = #{postId}
+    </select>
+
+</mapper>

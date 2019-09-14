@@ -4,87 +4,61 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty
     @Email
     @Length(min = 6, max = 32)
-    @Column(name = "email", nullable = false, columnDefinition = "varchar(32)")
     private String email;
 
     @NotEmpty
     @Length(min = 1, max = 10)
-    @Column(name = "nickname", nullable = false, columnDefinition = "varchar(10)")
     private String nickname;
 
-    @Column(name = "avatar", nullable = false, columnDefinition = "varchar(255) default ''")
     private String avatar;
 
     @NotEmpty
-    @Column(name = "password", nullable = false, columnDefinition = "varchar(128)")
     private String password;
 
     // 微博
-    @Column(name = "weibo", nullable = false, columnDefinition = "varchar(32) default ''")
     private String Weibo;
 
     // qq
-    @Column(name = "qq", nullable = false, columnDefinition = "varchar(16) default ''")
     private String Qq;
 
     // Github
-    @Column(name = "github", nullable = false, columnDefinition = "varchar(32) default ''")
     private String Github;
 
     // 个人简介
-    @Column(name = "intro", nullable = false, columnDefinition = "varchar(255) default ''")
     private String Intro;
 
     // 状态[0正常,1禁止回复,2禁止发帖,3禁止回复+发帖,4禁止登录]
-    @Column(name = "status", nullable = false, columnDefinition = "tinyint(2) default 0")
     private Integer status;
 
     // 最后登录时间
     @CreatedDate
-    @Column(name = "last_login_at", columnDefinition = "timestamp")
     private Date lastLoginAt;
 
     // 创建时间
     @CreatedDate
-    @Column(name = "created_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     private Date createdAt;
 
     // 最后编辑时间
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedAt;
 
-    @JoinTable(name = "user_post_favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-    @ManyToMany
-    private List<Post> favoritePosts;
-
     public User() {
-    }
-
-    public List<Post> getFavoritePosts() {
-        return favoritePosts;
-    }
-
-    public void setFavoritePosts(List<Post> favoritePosts) {
-        this.favoritePosts = favoritePosts;
     }
 
     public String getWeibo() {
