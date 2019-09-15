@@ -44,12 +44,12 @@
     </update>
 
     <!-- 喜欢帖子记录 -->
-    <select id="findPostFav" resultType="UserPostFav">
-        SELECT user_id,post_id from user_post_favorite where user_id = #{userId} and post_id = #{postId}
+    <select id="findPostFav" resultType="java.lang.Long">
+        SELECT user_id from user_post_favorite where user_id = #{userId} and post_id = #{postId}
     </select>
 
     <!-- 喜欢帖子 -->
-    <insert id="postFav">
+    <insert id="createPostFav">
         INSERT INTO user_post_favorite (user_id, post_id) values (#{userId}, #{postId})
     </insert>
 
@@ -58,6 +58,7 @@
         delete from user_post_favorite where user_id = #{userId} and post_id = #{postId}
     </delete>
 
+    <!-- 查找帖子的所有喜欢用户 -->
     <select id="selectFavUsers" resultType="User">
         SELECT
         u.id,

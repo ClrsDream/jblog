@@ -47,8 +47,8 @@ public class PostController extends BaseController {
     @PostMapping(WebRouter.POST_CREATE)
     @CaptchaImageVerify
     public RedirectView store(RedirectAttributes redirectAttributes,
-                              @Valid @ModelAttribute Post post,
                               BindingResult bindingResult,
+                              @Valid @ModelAttribute Post post,
                               @RequestParam(name = "tagStr", defaultValue = "") String tagStr) {
         if (bindingResult.hasErrors()) {
             return error(WebRouter.POST_CREATE, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
@@ -70,6 +70,7 @@ public class PostController extends BaseController {
     public String detail(ModelMap modelMap,
                          @PathVariable("id") Long id) {
         Post post = postService.findById(id);
+        log.info("post:{}", post);
         if (null == post) {
             throw new PostNotFoundException();
         }
@@ -77,9 +78,15 @@ public class PostController extends BaseController {
         List<Tag> tags = tagService.selectTags(post.getId());
         // 获取喜欢的用户集合
         List<User> favUsers = userService.selectFavUsers(post.getId());
+        // 当前用户是否已经喜欢
+        boolean fav = false;
+        if (userService.getUser() != null) {
+            fav = userService.userFavPost(userService.getUser().getId(), post.getId());
+        }
 
         modelMap.addAttribute("post", post);
         modelMap.addAttribute("tags", tags);
+        modelMap.addAttribute("fav", fav);
         modelMap.addAttribute("favUsers", favUsers);
         return "/post/detail";
     }

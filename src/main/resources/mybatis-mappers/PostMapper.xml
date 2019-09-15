@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xiaoteng.blog.mappers.PostMapper">
 
-    <sql id="postColumns">id,title,content,user_id,read_num,published_at,created_at,updated_at</sql>
+    <sql id="postColumns">id,title,content,user_id,read_num,user_fav_count,comments_count,published_at,created_at,updated_at</sql>
 
     <insert id="insert" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO posts (title,content,published_at,user_id,read_num) values
@@ -20,6 +20,8 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readNum" column="read_num"/>
+        <result property="userFavCount" column="user_fav_count"/>
+        <result property="commentsCount" column="comments_count"/>
         <result property="publishedAt" column="published_at"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
@@ -40,6 +42,8 @@
         p.published_at,
         p.created_at,
         p.updated_at,
+        p.user_fav_count,
+        p.comments_count,
         u.id as user_id,
         u.nickname as user_nickname,
         u.avatar as user_avatar,
@@ -53,6 +57,14 @@
         UPDATE posts set read_num = read_num + 1 where id = #{id}
     </update>
 
+    <update id="userFavCountDec">
+        UPDATE posts set posts.user_fav_count = posts.user_fav_count - 1 where id = #{id}
+    </update>
+
+    <update id="userFavCountInc">
+        UPDATE posts set posts.user_fav_count = posts.user_fav_count + 1 where id = #{id}
+    </update>
+
     <resultMap id="postPaginateResult" type="Post">
         <constructor>
             <idArg column="id" javaType="java.lang.Long"/>
@@ -61,6 +73,8 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readNum" column="read_num"/>
+        <result property="userFavCount" column="user_fav_count"/>
+        <result property="commentsCount" column="comments_count"/>
         <result property="publishedAt" column="published_at"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
@@ -78,6 +92,8 @@
         p.content,
         p.user_id,
         p.read_num,
+        p.user_fav_count,
+        p.comments_count,
         p.published_at,
         p.created_at,
         p.updated_at,
@@ -94,11 +110,45 @@
         ORDER BY ${sort} ${direct}
     </select>
 
-    <select id="count" resultType="java.lang.Long">
-        select COUNT(*) as count from posts where 1 = 1
+    <select id="count" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select
+        COUNT(*) as count
+        FROM posts where 1 = 1
         <if test="userId != null">
-            AND p.user_id = #{userId}
+            AND user_id = #{userId}
         </if>
+    </select>
+
+    <select id="userFavCount" resultType="java.lang.Long" useCache="true">
+        select
+        COUNT(*) as count
+        FROM user_post_favorite where post_id = #{postId}
+    </select>
+
+    <insert id="tagRelationCreate">
+        INSERT INTO post_tag (post_id, tag_id) values (#{postId}, #{tagId})
+    </insert>
+
+    <select id="paginateUserFav" resultMap="postPaginateResult">
+        SELECT
+        p.id,
+        p.title,
+        p.content,
+        p.user_id,
+        p.read_num,
+        p.user_fav_count,
+        p.comments_count,
+        p.published_at,
+        p.created_at,
+        p.updated_at,
+        u.id as user_id,
+        u.nickname as user_nickname,
+        u.avatar as user_avatar,
+        u.intro as user_intro
+        FROM user_post_favorite as upf
+        inner join posts p on upf.user_id = p.user_id
+        inner join users u on upf.user_id = u.id
+        where upf.user_id = #{userId}
     </select>
 
 </mapper>
