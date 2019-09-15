@@ -18,6 +18,7 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/t/new", "anon");
         chainDefinition.addPathDefinition("/t/hot", "anon");
         chainDefinition.addPathDefinition("/tags", "anon");
+        chainDefinition.addPathDefinition("/tag/*", "anon");
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/login", "anon");
         // 帖子界面

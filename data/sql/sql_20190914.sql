@@ -52,3 +52,17 @@ CREATE TABLE `tags` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `post_comments` (
+    `id` bigint(20) unsigned not null AUTO_INCREMENT,
+    `user_id` bigint(20) unsigned not null,
+    `post_id` bigint(20) unsigned not null,
+    `comment_id` bigint(20) unsigned not null,
+    `content` varchar(255) not null,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `deleted_at` timestamp,
+    PRIMARY KEY (`id`),
+    KEY `post_id` (`post_id`),
+    KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

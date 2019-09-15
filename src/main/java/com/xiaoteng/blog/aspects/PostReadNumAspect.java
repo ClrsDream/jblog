@@ -2,15 +2,14 @@ package com.xiaoteng.blog.aspects;
 
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.service.PostService;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.ModelMap;
 
 @Aspect
 @Component
@@ -25,15 +24,24 @@ public class PostReadNumAspect {
 
     }
 
-    @After("p()")
-    public void doAfter(JoinPoint joinPoint) {
-        if (joinPoint.getArgs().length == 0) {
-            return;
+    @Around("p()")
+    public Object doAfter(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        Object res = proceedingJoinPoint.proceed();
+
+        // after之后处理
+        Object[] objects = proceedingJoinPoint.getArgs();
+        Long postId = null;
+        for (Object o : objects) {
+            if (o instanceof Long) {
+                postId = (Long) o;
+            }
         }
-        // post阅读数量增加
-        ModelMap modelMap = (ModelMap) joinPoint.getArgs()[0];
-        Post post = (Post) modelMap.get("post");
-        postService.readNumInc(post);
+        if (postId != null) {
+            Post post = postService.findById(postId);
+            postService.readNumInc(post);
+        }
+
+        return res;
     }
 
 }

@@ -4,9 +4,11 @@ import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.PostReadNumInc;
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
 import com.xiaoteng.blog.model.Post;
+import com.xiaoteng.blog.model.PostComment;
 import com.xiaoteng.blog.model.Tag;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.router.WebRouter;
+import com.xiaoteng.blog.service.PostCommentService;
 import com.xiaoteng.blog.service.PostService;
 import com.xiaoteng.blog.service.TagService;
 import com.xiaoteng.blog.service.UserService;
@@ -38,6 +40,9 @@ public class PostController extends BaseController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private PostCommentService postCommentService;
 
     @GetMapping(WebRouter.POST_CREATE)
     public String create() {
@@ -82,11 +87,14 @@ public class PostController extends BaseController {
         if (userService.getUser() != null) {
             fav = userService.userFavPost(userService.getUser().getId(), post.getId());
         }
+        // 评论
+        List<PostComment> postComments = postCommentService.selectPostComments(post);
 
         modelMap.addAttribute("post", post);
         modelMap.addAttribute("tags", tags);
         modelMap.addAttribute("fav", fav);
         modelMap.addAttribute("favUsers", favUsers);
+        modelMap.addAttribute("postComments", postComments);
         return "/post/detail";
     }
 
