@@ -37,7 +37,7 @@
                         <span class="text-sm text-gray-600"><i class="fa fa-info"></i> 文章标签，多个标签请用空格分开，最多5个。</span>
                     </div>
                     <div>
-                        <input type="text" placeholder="文章发布时间" required id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
+                        <input type="text" placeholder="文章发布时间" readonly required id="publishedAt" name="publishedAt" class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800">
                     </div>
                     <div th:insert="/components/image_captcha :: image_captcha"></div>
                     <div class="mt-6">
@@ -60,7 +60,7 @@
             return true;
         }
         $(function () {
-            laydate.render({elem: '#publishedAt',type:'datetime'});
+            laydate.render({elem: '#publishedAt',type:'datetime',trigger:'click'});
 
             window.editor = new window.wangEditor('#editor');
             window.editor.customConfig.menus = [

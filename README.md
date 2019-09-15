@@ -55,7 +55,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `com.github.whvcse` | `easy-captcha` | 图片验证码 |
 | `org.mybatis.spring.boot` | `mybatis-spring-boot-starter` | mybatis用于MySQL数据库操作 |
 | `com.github.pagehelper` | `pagehelper-spring-boot-starter` | mybatis分页插件 |
-| `redis.clients` | `jedis` | 主要用于锁🔐控制 |
+| `redis.clients` | `jedis` | 主要用于锁🔐，限流控制 |
 
 #### Annotations
 

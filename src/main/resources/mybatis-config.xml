@@ -7,10 +7,12 @@
         <typeAlias type="com.xiaoteng.blog.model.User" alias="User" />
         <typeAlias type="com.xiaoteng.blog.model.Post" alias="Post" />
         <typeAlias type="com.xiaoteng.blog.model.Tag" alias="Tag" />
+        <typeAlias type="com.xiaoteng.blog.model.PostComment" alias="PostComment" />
     </typeAliases>
     <mappers>
         <mapper resource="mybatis-mappers/PostMapper.xml"/>
         <mapper resource="mybatis-mappers/UserMapper.xml"/>
         <mapper resource="mybatis-mappers/TagMapper.xml"/>
+        <mapper resource="mybatis-mappers/PostCommentMapper.xml"/>
     </mappers>
 </configuration>

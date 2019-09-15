@@ -38,4 +38,6 @@ public class WebRouter {
     public final static String HOME_FAVORITE = "/home/favorite";
     // 图片验证码
     public final static String CAPTCHA_IMAGE = "/captcha/image";
+    // 帖子评论
+    public final static String POST_COMMENT_CREATE = "/post/{id}/comment";
 }

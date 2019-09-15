@@ -13,13 +13,12 @@ public class BaseController {
     @Autowired
     private HttpServletRequest request;
 
+    protected String prevPath() {
+        return request.getHeader("Referer");
+    }
+
     protected RedirectView back(String errorMessage, RedirectAttributes redirectAttribute) {
-        String query = request.getQueryString();
-        String url = request.getRequestURI();
-        if (query != null && !query.isEmpty()) {
-            url = request.getRequestURI() + "?" + query;
-        }
-        return flashState("error", url, errorMessage, redirectAttribute);
+        return flashState("error", prevPath(), errorMessage, redirectAttribute);
     }
 
     // 失败的跳转

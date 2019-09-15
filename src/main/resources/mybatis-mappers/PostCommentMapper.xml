@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoteng.blog.mappers.PostCommentMapper">
+
+    <sql id="postCommentColumn">${alias}.id,${alias}.user_id,${alias}.post_id,${alias}.comment_id,${alias}.content,${alias}.created_at,${alias}.updated_at</sql>
+
+    <insert id="insert" parameterType="PostComment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO post_comments (user_id, post_id, comment_id, content) value (#{userId}, #{postId}, #{commentId}, #{content});
+    </insert>
+
+    <resultMap id="selectPostCommentsResult" type="PostComment">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long"/>
+        </constructor>
+        <result property="userId" column="user_id"/>
+        <result property="postId" column="post_id"/>
+        <result property="commentId" column="comment_id"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <association property="user" javaType="User">
+            <id property="id" column="user_id"/>
+            <result property="nickname" column="user_nickname"/>
+            <result property="avatar" column="user_avatar"/>
+            <result property="intro" column="user_intro"/>
+        </association>
+    </resultMap>
+    <select id="selectPostComments" resultMap="selectPostCommentsResult">
+        SELECT
+        pc.id,pc.id, pc.user_id, pc.post_id, pc.comment_id, pc.content, pc.created_at, pc.updated_at,
+        u.nickname as user_nickname,u.avatar as user_avatar,u.intro as user_intro
+        FROM post_comments as pc
+        inner join users u on pc.user_id = u.id
+        where post_id = #{postId} and deleted_at is not null
+        order by created_at desc
+    </select>
+
+</mapper>
