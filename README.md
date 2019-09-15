@@ -28,13 +28,12 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [ ] 站内消息
 + [ ] 文章评论
 + [x] 文章喜欢
-+ [ ] SEO定时提交
 + [ ] 数据库定时备份
 + [ ] 多驱动图片上传(Native/阿里云oss/腾讯cos)
 + [x] 多驱动邮件发送(SMTP/阿里云)
 + [x] 图形验证码
 + [x] CSRF/XSS
-+ [ ] 单元测试
++ [x] 单元测试
 + [ ] 全文搜索
 
 #### 技术栈
@@ -46,15 +45,16 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 
 #### 扩展包
 
-| 扩展包 | 应用 |
-| --- | --- |
-| `org.apache.shiro` | 用户的Authentication，Authorization支持 |
-| `spring-boot-starter-data-redis` | 用于session存储 |
-| `aliyun-java-sdk-dm` | 阿里云邮件发送，用于用户密码找回的邮件发送，欢迎邮件等 |
-| `spring-boot-starter-security` | 用于用户的password字段加密（`BCryptPasswordEncoder`）|
-| `org.jsoup` | xss安全过滤 |
-| `com.youbenzi.MDTool` | Markdown解析，用于支持用户简介的Markdown语法 |
-| `com.github.whvcse.easy-captcha` | 图片验证码 |
+| GroupId | ArtifactId | 应用 |
+| --- | --- | --- |
+| `org.apache.shiro` | `shiro-spring-boot-web-starter` | 用户的Authentication，Authorization支持 |
+| `com.aliyun` | `aliyun-java-sdk-dm` | 阿里云邮件发送，用于用户密码找回的邮件发送，欢迎邮件等 |
+| `org.springframework.boot` | `spring-boot-starter-security` | 用于用户的password字段加密（`BCryptPasswordEncoder`）|
+| `org.jsoup` | `jsoup` | xss安全过滤 |
+| `com.youbenzi` | `MDTool` | Markdown解析，用于支持用户简介的Markdown语法 |
+| `com.github.whvcse` | `easy-captcha` | 图片验证码 |
+| `org.mybatis.spring.boot` | `mybatis-spring-boot-starter` | mybatis用于MySQL数据库操作 |
+| `com.github.pagehelper` | `pagehelper-spring-boot-starter` | mybatis分页插件 |
 
 #### 注解
 

@@ -20,9 +20,13 @@ public interface PostMapper {
 
     Long userFavCount(@Param("postId") Long postId);
 
+    Long tagCount(@Param("tagId") Long tagId);
+
     void tagRelationCreate(Long postId, Long tagId);
 
     List<Post> paginateUserFav(Long userId);
+
+    List<Post> paginateTag(Long tagId);
 
     void userFavCountDec(Long postId);
 

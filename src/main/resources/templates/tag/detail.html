@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/app :: layout(~{::title}, ~{::#content})}">
 <head>
-    <title>JBlog - 基于Spring Boot开发的最美文章发布系统</title>
+    <title>"[[${tag.getName()}]]"标签下的文章</title>
 </head>
 <body>
 <div id="content">
@@ -9,10 +9,7 @@
     <div class="max-w-2xl mx-auto flex sm:flex-col md:flex-row py-3">
         <div class="flex-1">
             <div class="my-1">
-                <a th:href="@{${router.INDEX_PARAM}(type='new')}" th:if="${sortType} eq 'new'" class="text-indigo-500 mr-5">最新内容</a>
-                <a th:href="@{${router.INDEX_PARAM}(type='new')}" th:unless="${sortType} eq 'new'" class="text-gray-500 mr-5">最新内容</a>
-                <a th:href="@{${router.INDEX_PARAM}(type='hot')}" th:if="${sortType} eq 'hot'" class="text-indigo-500">热门推荐</a>
-                <a th:href="@{${router.INDEX_PARAM}(type='hot')}" th:unless="${sortType} eq 'hot'" class="text-gray-500">热门推荐</a>
+                <span class="inline-block px-1 bg-gray-600 mr-2 mb-2 rounded-lg text-gray-300">[[${tag.getName()}]]</span>
             </div>
             <div class="pt-2">
                 <div class="mt-3 border-b border-gray-600" th:each="post : ${posts}">
@@ -39,9 +36,9 @@
                 </div>
             </div>
             <div class="mt-5 text-right">
-                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasPrevPage()}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page - 1})}">上一页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasPrevPage()}" th:href="@{${router.TAG_DETAIL}(id=${tag.getId()},page=${page - 1})}">上一页</a>
                 <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg">共[[${pageHelper.getPageCount()}]]页</a>
-                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasNextPage()}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page}+1)}">下一页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasNextPage()}" th:href="@{${router.TAG_DETAIL}(id=${tag.getId()},page=${page}+1)}">下一页</a>
             </div>
         </div>
     </div>

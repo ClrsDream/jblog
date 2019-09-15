@@ -12,6 +12,8 @@ public interface TagMapper {
 
     Tag findByName(String name);
 
+    Tag findById(Long id);
+
     List<Tag> all();
 
     List<Tag> selectTagByPostId(Long postId);

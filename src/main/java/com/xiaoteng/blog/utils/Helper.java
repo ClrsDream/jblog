@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Date;
 
 public class Helper {
 
@@ -62,6 +63,10 @@ public class Helper {
     // 将16位数转为32位
     public static String fillMD5(String md5) {
         return md5.length() == 32 ? md5 : fillMD5("0" + md5);
+    }
+
+    public static String diffForHumans(Date date) {
+        return RelativeDateFormat.format(date);
     }
 
 }

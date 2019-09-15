@@ -17,6 +17,10 @@ public class TagService {
         return tagMapper.all();
     }
 
+    public Tag findById(Long id) {
+        return tagMapper.findById(id);
+    }
+
     public Tag findTag(String name) {
         return tagMapper.findByName(name);
     }
