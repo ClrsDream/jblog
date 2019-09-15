@@ -20,7 +20,7 @@
                     <span class="mr-2"><i class="fa fa-eye"></i> [[${post.getReadNum()}]]</span>
                     <span class="mr-2"><i class="fa fa-comment"></i> [[${post.getCommentsCount()}]]</span>
                     <span class="mr-2"><i class="fa fa-heart"></i> [[${post.getUserFavCount()}]]</span>
-                    <span class="mr-2"><i class="fa fa-calendar mr-1" aria-hidden="true"></i> [[${post.getPublishedAt()}]]</span>
+                    <span class="mr-2"><i class="fa fa-calendar mr-1" aria-hidden="true"></i> [[${helper.diffForHumans(post.getPublishedAt())}]]</span>
                 </div>
             </div>
         </div>

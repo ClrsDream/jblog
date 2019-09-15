@@ -23,7 +23,7 @@
                         <div class="float-left h-14 ml-3">
                             <span class="text-lg h-6 mb-1 text-gray-500">[[${post.getUser().getNickname()}]]</span><br>
                             <span class="text-gray-600 h-6 mt-1 leading-normal text-sm">
-                                <i class="fa fa-calendar mr-1" aria-hidden="true"></i> [[${post.getPublishedAt()}]]
+                                <i class="fa fa-calendar mr-1" aria-hidden="true"></i> [[${helper.diffForHumans(post.getPublishedAt())}]]
                             </span>
                         </div>
                     </a>
@@ -35,7 +35,6 @@
                         <span class="mr-2"><i class="fa fa-eye"></i> [[${post.getReadNum()}]]</span>
                         <span class="mr-2"><i class="fa fa-comment"></i> [[${post.getCommentsCount()}]]</span>
                         <span class="mr-2"><i class="fa fa-heart"></i> [[${post.getUserFavCount()}]]</span>
-                        <span class="mr-2"><i class="fa fa-calendar mr-1" aria-hidden="true"></i> [[${post.getPublishedAt()}]]</span>
                     </div>
                 </div>
             </div>
