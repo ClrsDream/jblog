@@ -8,8 +8,8 @@
     <sql id="postColumns">id,title,content,user_id,read_num,user_fav_count,comments_count,published_at,created_at,updated_at</sql>
 
     <insert id="insert" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO posts (title,content,published_at,user_id,read_num) values
-        (#{title},#{content},#{publishedAt},#{userId},#{readNum})
+        INSERT INTO posts (user_id,title,content,published_at) values
+        (#{userId},#{title},#{content},#{publishedAt})
     </insert>
 
     <resultMap id="postDetail" type="Post">
@@ -146,7 +146,7 @@
         u.avatar as user_avatar,
         u.intro as user_intro
         FROM user_post_favorite as upf
-        inner join posts p on upf.user_id = p.user_id
+        inner join posts p on upf.post_id = p.id
         inner join users u on upf.user_id = u.id
         where upf.user_id = #{userId}
     </select>

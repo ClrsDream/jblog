@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface PostMapper {
-    Long insert(Post post);
+    void insert(Post post);
 
     Post findById(Long id);
 
