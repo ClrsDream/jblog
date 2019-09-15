@@ -1,7 +1,7 @@
 
-## **JBlog** - 基于 Spring Boot 开发的文章发布系统
+## 🛩 **JBlog** - 基于 Spring Boot 开发的文章发布系统
 
-#### 安装
+#### 🔥 安装
 
 下载代码：
 
@@ -55,8 +55,9 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 | `com.github.whvcse` | `easy-captcha` | 图片验证码 |
 | `org.mybatis.spring.boot` | `mybatis-spring-boot-starter` | mybatis用于MySQL数据库操作 |
 | `com.github.pagehelper` | `pagehelper-spring-boot-starter` | mybatis分页插件 |
+| `redis.clients` | `jedis` | 主要用于锁🔐控制 |
 
-#### 注解
+#### Annotations
 
 | 注解 | 作用 |
 | --- | --- |
@@ -79,7 +80,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 
 **JBlog** 采用 MIT 开源许可证，你可以在商业项目中免费使用 **JBlog** 或者基于 **JBlog** 二次 开发而不必支付费用。
 
-#### 联系我
+#### Contact Me
 
 <p>
 <img src="https://user-images.githubusercontent.com/12671205/64419962-a1edc500-d0d0-11e9-8662-e57ab8382078.jpg" width=300>
