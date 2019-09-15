@@ -32,4 +32,8 @@ public interface PostMapper {
 
     void userFavCountInc(Long postId);
 
+    void commentsCountInc(Long postId);
+
+    void commentsCountDec(Long postId);
+
 }

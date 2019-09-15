@@ -35,15 +35,15 @@
 
         <!-- 评论框 -->
         <div class="w-full flex flex-col mt-2">
-            <form th:action="@{${router.POST_COMMENT_CREATE}(id=${post.getId()})}" method="post">
+            <form th:if="${isLogin}" th:action="@{${router.POST_COMMENT_CREATE}(id=${post.getId()})}" method="post">
                 <input type="hidden" name="comment_id" value="0">
                 <div class="flex-1 flex flex-row">
                     <div class="px-2 pt-2">
-                        <img src="https://ps.ssl.qhimg.com/t014c6406391457084f.jpg" class="w-12 h-12 border-gray-500 border-2 rounded-full">
+                        <img th:src="${userService.getUser().getAvatar()}" class="w-12 h-12 border-gray-500 border-2 rounded-full">
                     </div>
                     <div class="flex-1">
                         <textarea name="content" required placeholder="写下您的评论..."
-                                  class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800"
+                                  class="w-full p-2 mt-2 mb-2 bg-gray-500 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-800 resize-none"
                                   rows="3"></textarea>
                     </div>
                 </div>
@@ -51,12 +51,20 @@
                     <button type="submit" class="float-right py-2 px-2 text-gray-500 border-2 border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600">发布</button>
                 </div>
             </form>
+            <textarea th:unless="${isLogin}"
+                      rows="1"
+                      placeholder="登录之后才可以评论哦..."
+                      class="w-full p-2 mt-2 mb-2 bg-gray-800 border-2 border-gray-700 rounded-lg focus:outline-none text-gray-800 placeholder-gray-600 resize-none" disabled></textarea>
         </div>
-        <div class="w-full">
-            <div class="w-full">
+        <div class="w-full float-left">
+            <div class="w-full float-left">
                 <h3 class="text-xl py-2 pt-2 text-gray-500"><span class="border-l-4 border-gray-700 pl-2">全部评论</span></h3>
             </div>
-            <div class="w-full flex flex-col">
+
+            <div class="w-full float-left" th:if="${postComments.size() == 0}" th:insert="/components/none :: none"></div>
+
+
+            <div th:if="${postComments.size() > 0}" class="w-full float-left flex flex-col">
                 <div class="flex-1 flex flex-row border-b border-gray-700 py-1" th:each="comment : ${postComments}">
                     <div class="px-2 pt-2">
                         <img th:src="${comment.getUser().getAvatar()}" class="w-12 h-12 border-gray-500 border-2 rounded-full">
@@ -72,9 +80,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <div class="w-full mt-10 border-2 border-gray-900 mb-10 rounded-lg">
+        <div class="w-full float-left mt-10 border-2 border-gray-900 mb-10 rounded-lg">
             <div class="w-full text-gray-500 px-3 py-2 bg-gray-900 text-gray-500">下面的的文章您可能也感兴趣</div>
             <div class="pl-8 py-2">
                 <ul class="list-disc">
@@ -92,7 +101,7 @@
                     $('.comment-option').show(500);
                 });
 
-                var isLogin = [[${userService.getUser() != null ? 1: 0}]];
+                var isLogin = [[${isLogin ? 1: 0}]];
                 $('#favorite-button').click(function () {
                     if (!isLogin) {
                         window.location.href = "[[${router.LOGIN}]]";

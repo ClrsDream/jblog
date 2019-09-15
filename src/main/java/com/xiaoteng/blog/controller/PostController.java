@@ -87,6 +87,11 @@ public class PostController extends BaseController {
         if (userService.getUser() != null) {
             fav = userService.userFavPost(userService.getUser().getId(), post.getId());
         }
+        // 是否登录
+        boolean isLogin = false;
+        if (userService.getUser() != null) {
+            isLogin = true;
+        }
         // 评论
         List<PostComment> postComments = postCommentService.selectPostComments(post);
 
@@ -95,6 +100,7 @@ public class PostController extends BaseController {
         modelMap.addAttribute("fav", fav);
         modelMap.addAttribute("favUsers", favUsers);
         modelMap.addAttribute("postComments", postComments);
+        modelMap.addAttribute("isLogin", isLogin);
         return "/post/detail";
     }
 

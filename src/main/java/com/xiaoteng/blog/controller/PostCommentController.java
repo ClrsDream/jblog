@@ -42,6 +42,9 @@ public class PostCommentController extends BaseController {
             throw new PostNotFoundException();
         }
         PostComment postComment = postCommentService.create(content, commentId, userService.getUser(), post);
+        // post评论数
+        postService.commentsCountInc(post.getId());
+
         return success(prevPath(), "评论成功", redirectAttributes);
     }
 

@@ -105,6 +105,14 @@ public class PostService {
         postMapper.userFavCountInc(postId);
     }
 
+    public void commentsCountDec(Long postId) {
+        postMapper.commentsCountDec(postId);
+    }
+
+    public void commentsCountInc(Long postId) {
+        postMapper.commentsCountInc(postId);
+    }
+
     public List<Post> paginateTag(int page, int pageSize, Tag tag) {
         PageHelper.startPage(page, pageSize);
         return postMapper.paginateTag(tag.getId());

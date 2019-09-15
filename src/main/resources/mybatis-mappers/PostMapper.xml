@@ -65,6 +65,14 @@
         UPDATE posts set posts.user_fav_count = posts.user_fav_count + 1 where id = #{id}
     </update>
 
+    <update id="commentsCountDec">
+        UPDATE posts set posts.comments_count = posts.comments_count - 1 where id = #{id}
+    </update>
+
+    <update id="commentsCountInc">
+        UPDATE posts set posts.comments_count = posts.comments_count + 1 where id = #{id}
+    </update>
+
     <resultMap id="postPaginateResult" type="Post">
         <constructor>
             <idArg column="id" javaType="java.lang.Long"/>
