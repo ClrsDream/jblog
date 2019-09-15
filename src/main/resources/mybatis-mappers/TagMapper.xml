@@ -17,6 +17,12 @@
         from tags
     </select>
 
+    <select id="findById" resultType="Tag">
+        SELECT
+        <include refid="tagColumns" />
+        from tags where id = #{id}
+    </select>
+
     <select id="findByName" resultType="Tag">
         SELECT
         <include refid="tagColumns" />

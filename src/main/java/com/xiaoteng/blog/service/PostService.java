@@ -105,4 +105,13 @@ public class PostService {
         postMapper.userFavCountInc(postId);
     }
 
+    public List<Post> paginateTag(int page, int pageSize, Tag tag) {
+        PageHelper.startPage(page, pageSize);
+        return postMapper.paginateTag(tag.getId());
+    }
+
+    public Long tagCount(Tag tag) {
+        return postMapper.tagCount(tag.getId());
+    }
+
 }

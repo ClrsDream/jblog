@@ -30,6 +30,8 @@ public class WebRouter {
     public final static String MEMBER_DETAIL = "/member/{id}";
     // 分类
     public final static String TAG_INDEX = "/tags";
+    // 分类详情
+    public final static String TAG_DETAIL = "/tag/{id}";
     // 喜欢文章
     public final static String POST_FAVORITE = "/home/post/favorite";
     // 我的喜欢

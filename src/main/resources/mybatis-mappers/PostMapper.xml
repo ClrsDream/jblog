@@ -151,4 +151,32 @@
         where upf.user_id = #{userId}
     </select>
 
+    <select id="paginateTag" resultMap="postPaginateResult">
+        SELECT
+        p.id,
+        p.title,
+        p.content,
+        p.user_id,
+        p.read_num,
+        p.user_fav_count,
+        p.comments_count,
+        p.published_at,
+        p.created_at,
+        p.updated_at,
+        u.id as user_id,
+        u.nickname as user_nickname,
+        u.avatar as user_avatar,
+        u.intro as user_intro
+        FROM post_tag as pt
+        inner join posts p on pt.post_id = p.id
+        inner join users u on p.user_id = u.id
+        where pt.tag_id = #{tagId}
+    </select>
+
+    <select id="tagCount" resultType="java.lang.Long" useCache="true">
+        select
+        COUNT(*) as count
+        FROM post_tag where tag_id = #{tagId}
+    </select>
+
 </mapper>
