@@ -40,9 +40,9 @@
                 </div>
             </div>
             <div class="mt-5 text-right">
-                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasPrevPage()}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page})}">上一页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasPrevPage()}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page - 1})}">上一页</a>
                 <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg">共[[${pageHelper.getPageCount()}]]页</a>
-                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasNextPage()}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page}+2)}">下一页</a>
+                <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasNextPage()}" th:href="@{${router.INDEX_PARAM}(type=${sortType},page=${page}+1)}">下一页</a>
             </div>
         </div>
     </div>

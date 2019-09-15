@@ -27,28 +27,21 @@ public class Post {
     @NotEmpty
     @Length(min = 5, max = 100000)
     private String content;
-
     // 阅读次数
     private Long readNum;
-
     // 用户喜欢数量
     private int userFavCount;
-
     // 评论数量
     private int commentsCount;
-
     // 帖子创建时间
     @CreatedDate
     private Date createdAt;
-
     // 帖子最后编辑时间
     @LastModifiedDate
     private Date updatedAt;
-
     // 帖子发布时间
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishedAt;
-
     // 作者
     private User user;
 
@@ -58,6 +51,23 @@ public class Post {
 
     public Post(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", readNum=" + readNum +
+                ", userFavCount=" + userFavCount +
+                ", commentsCount=" + commentsCount +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", publishedAt=" + publishedAt +
+                ", user=" + user +
+                '}';
     }
 
     public int getUserFavCount() {
@@ -148,17 +158,4 @@ public class Post {
         this.publishedAt = publishedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", readNum=" + readNum +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", publishedAt=" + publishedAt +
-                '}';
-    }
 }

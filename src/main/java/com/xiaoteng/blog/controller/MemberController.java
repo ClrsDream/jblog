@@ -7,6 +7,7 @@ import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.PostService;
 import com.xiaoteng.blog.service.UserService;
 import com.xiaoteng.blog.service.query.PostQuery;
+import com.xiaoteng.blog.utils.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -38,13 +39,16 @@ public class MemberController {
             throw new MemberNotFoundException();
         }
         page = page <= 0 ? 1 : page;
-        page -= 1;
         PostQuery postQuery = new PostQuery();
         postQuery.setUser(user);
         List<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
+        Long count = postService.count(postQuery);
+        PageHelper pageHelper = new PageHelper(count, page, pageSize);
+
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("posts", posts);
+        modelMap.addAttribute("pageHelper", pageHelper);
         return "member/detail";
     }
 

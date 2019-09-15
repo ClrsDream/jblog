@@ -9,6 +9,7 @@ import com.xiaoteng.blog.service.UserService;
 import com.xiaoteng.blog.service.query.PostQuery;
 import com.xiaoteng.blog.utils.HashTool;
 import com.xiaoteng.blog.utils.Helper;
+import com.xiaoteng.blog.utils.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,13 @@ public class HomeController extends BaseController {
         PostQuery postQuery = new PostQuery();
         postQuery.setUser(userService.getUser());
         page = page <= 0 ? 1 : page;
-        page -= 1;
         List<Post> posts = postService.paginateOrderByPublishedAtDesc(page, pageSize, postQuery);
-        log.info("查询结果：{}，查询条件：{}", posts, postQuery);
+        Long count = postService.count(postQuery);
+        PageHelper pageHelper = new PageHelper(count, page, pageSize);
         modelMap.addAttribute("active", "index");
         modelMap.addAttribute("posts", posts);
         modelMap.addAttribute("page", page);
+        modelMap.addAttribute("pageHelper", pageHelper);
         return "home/index";
     }
 
@@ -107,11 +109,16 @@ public class HomeController extends BaseController {
     }
 
     @GetMapping(WebRouter.HOME_FAVORITE)
-    public String favorite(ModelMap modelMap) {
+    public String favorite(ModelMap modelMap,
+                           @RequestParam(name = "page", defaultValue = "1") int page) {
         User user = userService.findUserById(userService.getUser().getId());
-        List<Post> posts = null;
+        page = page < 1 ? 1 : page;
+        List<Post> posts = postService.paginateUserFav(page, pageSize, user);
+        Long count = postService.userFavCount(user);
+        PageHelper pageHelper = new PageHelper(count, page, pageSize);
         modelMap.addAttribute("posts", posts);
         modelMap.addAttribute("active", "favorite");
+        modelMap.addAttribute("pageHelper", pageHelper);
         return "home/favorite";
     }
 
