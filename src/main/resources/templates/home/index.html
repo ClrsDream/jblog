@@ -6,9 +6,11 @@
 <body>
 <div id="content">
     <div class="max-w-2xl mx-auto mt-5 mb-5 min-h-screen">
-        <div th:insert="/components/user_header :: user_header"></div>
+        <div th:replace="/components/user_header :: user_header"></div>
 
-        <div class="w-full pt-5">
+        <div th:if="${posts.size()} eq 0" th:insert="/components/none :: none"></div>
+
+        <div th:if="${posts.size()} gt 0" class="w-full pt-5">
             <div th:each="post : ${posts}" class="flex flex-col border-b border-gray-700 py-3">
                 <a th:href="@{${router.POST_DETAIL}(id=${post.getId()})}" class="block flex py-2 text-gray-400 text-lg">
                     [[${post.getTitle()}]]
@@ -25,7 +27,7 @@
             </div>
         </div>
 
-        <div class="w-full my-5 text-right">
+        <div th:if="${posts.size()} gt 0" class="w-full my-5 text-right">
             <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasPrevPage()}" th:href="@{${router.HOME}(page=${page - 1})}">上一页</a>
             <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg">共[[${pageHelper.getPageCount()}]]页</a>
             <a class="inline-block px-3 py-1 text-gray-500 bg-gray-700 rounded-lg" th:if="${pageHelper.hasNextPage()}" th:href="@{${router.HOME}(page=${page}+1)}">下一页</a>
