@@ -26,7 +26,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [x] 文章管理
 + [x] 文章标签
 + [ ] 站内消息
-+ [ ] 文章评论
++ [x] 文章评论
 + [x] 文章喜欢
 + [ ] 数据库定时备份
 + [ ] 多驱动图片上传(Native/阿里云oss/腾讯cos)
