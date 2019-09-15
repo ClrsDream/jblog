@@ -47,22 +47,22 @@ public class PostController extends BaseController {
     @PostMapping(WebRouter.POST_CREATE)
     @CaptchaImageVerify
     public RedirectView store(RedirectAttributes redirectAttributes,
-                              BindingResult bindingResult,
                               @Valid @ModelAttribute Post post,
+                              BindingResult bindingResult,
                               @RequestParam(name = "tagStr", defaultValue = "") String tagStr) {
         if (bindingResult.hasErrors()) {
-            return error(WebRouter.POST_CREATE, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
+            return back(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
         }
         String content = Helper.clean(post.getContent());
-        if (content.isEmpty()) {
+        if (content.isBlank()) {
             // 过滤xss之后为空
-            return error(WebRouter.POST_CREATE, "文章内容不能为空", redirectAttributes);
+            return back("文章内容不能为空", redirectAttributes);
         }
         String[] tagArr = tagStr.split(" ", 5);
-        log.info("{}", tagArr);
+        log.info("创建文章收到的标签tags:{}", tagArr);
         postService.createPost(post, content, userService.getUser(), tagArr);
 
-        return super.success(WebRouter.INDEX, "添加成功", redirectAttributes);
+        return success(WebRouter.INDEX, "添加成功", redirectAttributes);
     }
 
     @GetMapping(WebRouter.POST_DETAIL)
@@ -70,7 +70,6 @@ public class PostController extends BaseController {
     public String detail(ModelMap modelMap,
                          @PathVariable("id") Long id) {
         Post post = postService.findById(id);
-        log.info("post:{}", post);
         if (null == post) {
             throw new PostNotFoundException();
         }

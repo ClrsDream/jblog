@@ -59,13 +59,13 @@ public class PostService {
 
     public void createPost(Post post, String content, User user, String[] tagArr) {
         Post post1 = new Post();
+        log.info("users:{}", user);
         post1.setUserId(user.getId());
         post1.setTitle(post.getTitle());
         post1.setContent(content);
         post1.setPublishedAt(post.getPublishedAt());
-        post1.setReadNum(0L);
-        Long postId = postMapper.insert(post);
-        log.info("postId:{}", postId);
+        postMapper.insert(post1);
+        log.info("创建post后返回的post:{}", post1);
 
         // 同步标签
         for (String tagName : tagArr) {
@@ -76,7 +76,7 @@ public class PostService {
                 tag = tagService.create(tagName);
             }
             // 关联
-            postMapper.tagRelationCreate(postId, tag.getId());
+            postMapper.tagRelationCreate(post1.getId(), tag.getId());
         }
     }
 

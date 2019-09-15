@@ -29,7 +29,6 @@ public class TagService {
         Tag tag = new Tag();
         tag.setName(tagName);
         tagMapper.insert(tag);
-        tag = findTag(tag.getName());
         return tag;
     }
 
