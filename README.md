@@ -35,6 +35,7 @@ java -jar -Dspring.profiles.active=prod target/blog-0.0.1-SNAPSHOT.jar
 + [x] CSRF/XSS
 + [x] 单元测试
 + [ ] 全文搜索
++ [x] 限流控制
 
 #### 技术栈
 
