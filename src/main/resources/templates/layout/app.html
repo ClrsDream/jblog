@@ -17,7 +17,7 @@
     <header class="px-10 py-2 bg-gray-900 shadow-xl">
         <div class="max-w-2xl mx-auto flex md:flex-row sm:flex-col">
             <div class="md:flex-initial">
-                <span class="text-indigo-500 font-mono text-4xl">JBlog</span>
+                <a href="/" class="text-indigo-500 font-mono text-4xl">JBlog</a>
             </div>
             <div class="md:w-full pl-5">
                 <ul class="pt-4">
@@ -38,16 +38,6 @@
         </div>
     </header>
 
-    <div th:if="${error}" class="max-w-2xl mx-auto bg-red-800 border-2 border-red-900 rounded-lg px-2 my-2 text-white py-3">
-        <p><i class="fa fa-exclamation-triangle mr-1"></i>[[${error}]]</p>
-    </div>
-    <div th:if="${success}" class="max-w-2xl mx-auto bg-green-800 border-2 border-green-900 rounded-lg px-2 my-2 text-white py-3">
-        <p><i class="fa fa-check-square mr-1"></i>[[${success}]]</p>
-    </div>
-    <div th:if="${shiroLoginFailure}" class="max-w-2xl mx-auto bg-orange-800 border-2 border-orange-900 rounded-lg px-2 my-2 text-white py-3">
-        <p><i class="fa fa-info-circle mr-1"></i>[[${shiroLoginFailure}]]</p>
-    </div>
-
     <div th:replace="${content}"></div>
 
     <div class="clearfix"></div>
@@ -64,5 +54,15 @@
 
     <script crossorigin="anonymous" integrity="sha384-uOV94oddoQmmdQhRtBPzXMX7CBxGVw888Cp9gjgRspAq/go5oea3c+cS8OlY+N6C" src="https://lib.baomitu.com/wangEditor/3.1.1/wangEditor.min.js"></script>
     <script src="/assets/js/laydate.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-RIQuldGV8mnjGdob13cay/K1AJa+LR7VKHqSXrrB5DPGryn4pMUXRLh92Ev8KlGF" src="https://lib.baomitu.com/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script th:if="${error}">
+        swal("错误", "[[${error}]]", "error");
+    </script>
+    <script th:if="${success}">
+        swal("成功", "[[${success}]]", "success");
+    </script>
+    <script th:if="${shiroLoginFailure}">
+        swal("错误", "[[${shiroLoginFailure}]]", "error");
+    </script>
 </body>
 </html>

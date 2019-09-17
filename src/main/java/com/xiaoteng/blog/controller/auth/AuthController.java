@@ -3,6 +3,7 @@ package com.xiaoteng.blog.controller.auth;
 import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.LoginRedirect;
 import com.xiaoteng.blog.controller.BaseController;
+import com.xiaoteng.blog.jblog.LimitService;
 import com.xiaoteng.blog.model.User;
 import com.xiaoteng.blog.router.WebRouter;
 import com.xiaoteng.blog.service.UserService;
@@ -27,6 +28,9 @@ public class AuthController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LimitService limitService;
 
     @GetMapping(WebRouter.REGISTER)
     @LoginRedirect
@@ -55,6 +59,10 @@ public class AuthController extends BaseController {
         }
         // 创建用户
         userService.createUser(user);
+
+        // 配置limit
+        limitService.setRegisterComment(user.getId());
+        limitService.setRegisterPost(user.getId());
 
         return success(WebRouter.LOGIN, "注册成功，请登录", redirectAttributes);
     }

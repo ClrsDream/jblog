@@ -2,7 +2,9 @@ package com.xiaoteng.blog.controller;
 
 import com.xiaoteng.blog.annotations.CaptchaImageVerify;
 import com.xiaoteng.blog.annotations.PostReadNumInc;
+import com.xiaoteng.blog.config.LimitConfig;
 import com.xiaoteng.blog.exceptions.PostNotFoundException;
+import com.xiaoteng.blog.jblog.LimitService;
 import com.xiaoteng.blog.model.Post;
 import com.xiaoteng.blog.model.PostComment;
 import com.xiaoteng.blog.model.Tag;
@@ -44,6 +46,12 @@ public class PostController extends BaseController {
     @Autowired
     private PostCommentService postCommentService;
 
+    @Autowired
+    private LimitService limitService;
+
+    @Autowired
+    private LimitConfig limitConfig;
+
     @GetMapping(WebRouter.POST_CREATE)
     public String create() {
         return "post/create";
@@ -55,6 +63,12 @@ public class PostController extends BaseController {
                               @Valid @ModelAttribute Post post,
                               BindingResult bindingResult,
                               @RequestParam(name = "tagStr", defaultValue = "") String tagStr) {
+        if (!limitService.canRegisterPost(userService.getUser().getId())) {
+            return back("新用户需要在自注册" + (limitConfig.getRegisterPost() / 60) + "分钟后才可以发帖", redirectAttributes);
+        }
+        if (!limitService.canPost(userService.getUser().getId())) {
+            return back("请不要频繁发帖", redirectAttributes);
+        }
         if (bindingResult.hasErrors()) {
             return back(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(), redirectAttributes);
         }
@@ -66,6 +80,9 @@ public class PostController extends BaseController {
         String[] tagArr = tagStr.split(" ", 5);
         log.info("创建文章收到的标签tags:{}", tagArr);
         postService.createPost(post, content, userService.getUser(), tagArr);
+
+        // 配置limit
+        limitService.setPost(userService.getUser().getId());
 
         return success(WebRouter.INDEX, "添加成功", redirectAttributes);
     }
