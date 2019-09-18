@@ -1,5 +1,6 @@
 package com.xiaoteng.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -29,6 +30,7 @@ public class User implements Serializable {
     private String avatar;
 
     @NotEmpty
+    @JsonIgnore
     private String password;
 
     // 微博

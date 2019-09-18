@@ -69,4 +69,41 @@
         where upf.post_id = #{postId}
     </select>
 
+    <select id="paginate" parameterType="User" resultType="User">
+        SELECT
+        <include refid="userColumns" />
+        FROM users
+            where  1=1
+        <if test="user != null">
+            <if test="user.email != null">
+                and email = #{user.email}
+            </if>
+            <if test="user.nickname != null">
+                and nickname = #{user.nickname}
+            </if>
+        </if>
+        ORDER BY created_at DESC
+        LIMIT #{start},#{pageSize}
+    </select>
+    <select id="count" parameterType="User" resultType="java.lang.Long">
+        SELECT
+        count(*) as count
+        FROM users
+        where  1=1
+        <if test="user != null">
+            <if test="user.email != null">
+                and email = #{user.email}
+            </if>
+            <if test="user.nickname != null">
+                and nickname = #{user.nickname}
+            </if>
+        </if>
+    </select>
+
+    <update id="update" parameterType="User">
+        UPDATE users set
+        email = #{user.email},nickname=#{user.nickname},avatar=#{user.avatar},status=#{user.status}
+        where id = #{id}
+    </update>
+
 </mapper>

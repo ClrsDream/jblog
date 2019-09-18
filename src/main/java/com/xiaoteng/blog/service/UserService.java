@@ -91,4 +91,16 @@ public class UserService {
         return userMapper.selectFavUsers(postId);
     }
 
+    public List<User> paginate(User user, int offset, int pageSize) {
+        return userMapper.paginate(user, offset, pageSize);
+    }
+
+    public Long count(User user) {
+        return userMapper.count(user);
+    }
+
+    public void update(User user, Long id) {
+        userMapper.update(user, id);
+    }
+
 }

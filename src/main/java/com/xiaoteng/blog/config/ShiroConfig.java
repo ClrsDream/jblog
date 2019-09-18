@@ -29,6 +29,8 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/password/reset", "anon");
         chainDefinition.addPathDefinition("/assets/**", "anon");
         chainDefinition.addPathDefinition("/favicon.ico", "anon");
+        // 后台API接口
+        chainDefinition.addPathDefinition("/backend/api/**", "anon");
 
         // 剩下的都需要登录检测
         chainDefinition.addPathDefinition("/**", "authc");
