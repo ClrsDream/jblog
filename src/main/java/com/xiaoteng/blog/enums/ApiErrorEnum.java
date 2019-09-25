@@ -1,6 +1,7 @@
 package com.xiaoteng.blog.enums;
 
 public enum ApiErrorEnum {
+    ADMINISTRATOR_USERNAME_NOT_EXISTS(1002, "管理员不存在"),
     ADMINISTRATOR_PASSWORD_ERROR(1001, "密码错误"),
     SYSTEM_ERROR(1002, "系统错误"),
     MEMBER_NOT_FOUND(1003, "用户不存在");

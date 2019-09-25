@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoteng.blog.mappers.RoleMapper">
+
+    <sql id="columns">id,name</sql>
+
+    <insert id="insert" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO permissions (name) values (#{name});
+    </insert>
+
+    <select id="all" resultType="Role">
+        select
+        <include refid="columns" />
+        from roles
+    </select>
+
+    <delete id="delete">
+        delete from roles where id = #{id}
+    </delete>
+
+</mapper>

@@ -8,11 +8,17 @@
         <typeAlias type="com.xiaoteng.blog.model.Post" alias="Post" />
         <typeAlias type="com.xiaoteng.blog.model.Tag" alias="Tag" />
         <typeAlias type="com.xiaoteng.blog.model.PostComment" alias="PostComment" />
+        <typeAlias type="com.xiaoteng.blog.model.Admin" alias="Admin" />
+        <typeAlias type="com.xiaoteng.blog.model.Role" alias="Role" />
+        <typeAlias type="com.xiaoteng.blog.model.Permission" alias="Permission" />
     </typeAliases>
     <mappers>
         <mapper resource="mybatis-mappers/PostMapper.xml"/>
         <mapper resource="mybatis-mappers/UserMapper.xml"/>
         <mapper resource="mybatis-mappers/TagMapper.xml"/>
         <mapper resource="mybatis-mappers/PostCommentMapper.xml"/>
+        <mapper resource="mybatis-mappers/AdminMapper.xml"/>
+        <mapper resource="mybatis-mappers/RoleMapper.xml"/>
+        <mapper resource="mybatis-mappers/PermissionMapper.xml"/>
     </mappers>
 </configuration>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoteng.blog.mappers.AdminMapper">
+
+    <sql id="columns">id,username,password,last_login_at,last_login_ip,created_at,updated_at</sql>
+
+    <insert id="insert" parameterType="Admin" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO admins (username,password,last_login_at,last_login_ip) values (#{username}, #{password},#{lastLoginAt},#{lastLoginIp});
+    </insert>
+
+    <select id="all" resultType="Admin">
+        select
+        <include refid="columns" />
+        from admins where deleted_at is not null
+    </select>
+
+    <select id="find" resultType="Admin">
+        select 
+        <include refid="columns" />
+        from admins where id = #{id} and deleted_at is not null
+    </select>
+
+    <select id="findByUsername" resultType="Admin">
+        select
+        <include refid="columns" />
+        from admins where username = #{username} and deleted_at is not null
+    </select>
+
+    <update id="update" parameterType="Admin">
+        update admins set username = #{username},password=#{password},last_login_at=#{lastLoginAt},last_login_ip=#{lastLoginIp} where id=#{id}
+    </update>
+
+    <delete id="delete">
+        update admins set deleted_at = current_timestamp where id = #{id}
+    </delete>
+
+</mapper>
